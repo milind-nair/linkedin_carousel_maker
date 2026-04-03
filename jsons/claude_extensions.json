@@ -1,0 +1,467 @@
+{
+  "meta": {
+    "title": "Claude Code Skills vs Hooks vs Agents vs Commands vs Plugins vs Rules",
+    "author": "Milind Nair",
+    "output_filename": "claude-code-extensions-carousel.pdf"
+  },
+  "global_styles": {
+    "dimensions": {
+      "width": 612,
+      "height": 765,
+      "margin": 48,
+      "viewport_band_height": 108
+    },
+    "colors": {
+      "bg": "#FFFDF5",
+      "bg_dark": "#1A1814",
+      "primary": "#D97706",
+      "primary_dark": "#92400E",
+      "primary_light": "#FEF3C7",
+      "accent": "#F59E0B",
+      "text": "#292524",
+      "text_light": "#F5F5F4",
+      "muted": "#A8A29E",
+      "stone": "#78716C",
+      "card_bg": "#FFFFFF",
+      "divider": "#E7E5E4",
+      "green": "#059669",
+      "green_bg": "#ECFDF5",
+      "purple": "#7C3AED",
+      "purple_bg": "#F5F3FF",
+      "blue": "#2563EB",
+      "red": "#DC2626",
+      "red_bg": "#FEF2F2"
+    },
+    "fonts": {
+      "display": {
+        "name": "Lora",
+        "candidates": [
+          "/usr/share/fonts/truetype/google-fonts/Lora-Variable.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+        ],
+        "fallback": "Helvetica-Bold"
+      },
+      "body": {
+        "name": "Poppins",
+        "candidates": [
+          "/usr/share/fonts/truetype/google-fonts/Poppins-Light.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+        ],
+        "fallback": "Helvetica"
+      },
+      "bold": {
+        "name": "PoppinsBold",
+        "candidates": [
+          "/usr/share/fonts/truetype/google-fonts/Poppins-Bold.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+        ],
+        "fallback": "Helvetica-Bold"
+      },
+      "mono": {
+        "name": "LiberationMono",
+        "candidates": [
+          "/usr/share/fonts/truetype/liberation/LiberationMono-Regular.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
+        ],
+        "fallback": "Courier"
+      }
+    },
+    "brand": {
+      "name": "MILIND NAIR",
+      "icon_path": "brandicon.png",
+      "show_footer": true
+    }
+  },
+  "slides": [
+    {
+      "type": "title_dark",
+      "kicker": "CLAUDE CODE",
+      "title_lines": ["Skills vs Hooks", "vs Agents vs", "Commands vs", "Plugins vs Rules"],
+      "subtitle_lines": [
+        "A practical breakdown of every",
+        "extension point in Claude Code",
+        "and when to use each one."
+      ],
+      "cta_text": "Swipe for all 12 slides \u2192",
+      "geometric_accent": {
+        "color": "#D97706",
+        "alpha": 0.07,
+        "x_pct": 0.55,
+        "y_pct": 0.72,
+        "w_pct": 0.6,
+        "h": 80
+      }
+    },
+    {
+      "type": "grid_cards",
+      "heading": "The Extension Stack",
+      "subheading": "Six extension points. Each solves a different problem.",
+      "columns": 2,
+      "items": [
+        {
+          "label": "Rules",
+          "trigger": "CLAUDE.md",
+          "description": "Always-on project context.\nLoaded every session.",
+          "color": "#92400E"
+        },
+        {
+          "label": "Skills",
+          "trigger": "/skill-name",
+          "description": "Reusable workflows.\nManual or auto-triggered.",
+          "color": "#D97706"
+        },
+        {
+          "label": "Hooks",
+          "trigger": "PreToolUse",
+          "description": "Deterministic automation.\nGuaranteed to fire.",
+          "color": "#059669"
+        },
+        {
+          "label": "Agents",
+          "trigger": "@agent-name",
+          "description": "Isolated workers with\nown context windows.",
+          "color": "#7C3AED"
+        },
+        {
+          "label": "Commands",
+          "trigger": "/command",
+          "description": "Now merged into Skills.\nSlash-command triggers.",
+          "color": "#2563EB"
+        },
+        {
+          "label": "Plugins",
+          "trigger": "plugin.json",
+          "description": "Bundles of everything.\nShareable packages.",
+          "color": "#DC2626"
+        }
+      ],
+      "bottom_takeaway": {
+        "label": "Quick model",
+        "body": "Rules stay loaded, skills get called, hooks enforce, agents isolate, plugins bundle.",
+        "accent_color": "#92400E"
+      }
+    },
+    {
+      "type": "content_cards",
+      "pill": { "text": "RULES", "bg": "#FEF3C7", "fg": "#92400E" },
+      "heading": "CLAUDE.md + .claude/rules/",
+      "subheading": "The foundation. Always-on context loaded before every conversation.",
+      "cards": [
+        {
+          "title": "What it does",
+          "body": "Defines project context, coding conventions, build commands, and constraints Claude follows every session. Every line competes for context window space, so keep it under 300 lines. Focus on what Claude would get wrong without the file.",
+          "accent_color": "#92400E"
+        },
+        {
+          "title": "When to use",
+          "body": "Rules that apply to nearly every task: commit message formats, file access restrictions, preferred tech stack, testing commands. If you repeat the same correction to Claude more than twice, add it here.",
+          "accent_color": "#D97706"
+        }
+      ],
+      "insight": {
+        "label": "Key insight",
+        "body": "Treat CLAUDE.md like a new hire's first-day briefing: project structure, what matters, what to avoid. Teams that invest here consistently outperform teams that do not, even running the exact same model.",
+        "accent_color": "#F59E0B"
+      },
+      "bottom_takeaway": {
+        "label": "Best use",
+        "body": "Put only the instructions Claude truly needs on almost every task.",
+        "accent_color": "#F59E0B"
+      }
+    },
+    {
+      "type": "content_cards",
+      "pill": { "text": "SKILLS", "bg": "#FEF3C7", "fg": "#D97706" },
+      "heading": "Skills (+ Commands)",
+      "subheading": "On-demand context. Markdown files invoked as slash commands or loaded automatically.",
+      "cards": [
+        {
+          "title": "How they work",
+          "body": "A SKILL.md file with YAML frontmatter (name, description) and markdown instructions. Lives in .claude/skills/ or ~/.claude/skills/. Claude loads the skill when its description matches the current task, or you invoke it with /skill-name.",
+          "accent_color": "#D97706"
+        },
+        {
+          "title": "Key capabilities",
+          "body": "Supports context: fork to run in isolated subagents. Can inject dynamic context via shell commands. Supports allowed-tools restrictions and agent type selection (Explore, Plan, or custom).",
+          "accent_color": "#F59E0B"
+        },
+        {
+          "title": "Commands merged in",
+          "body": "Commands have been merged into Skills. A file at .claude/commands/deploy.md and .claude/skills/deploy/SKILL.md both create /deploy. Existing commands still work. Skills add subagent execution, auto-invocation, and supporting files.",
+          "accent_color": "#92400E"
+        }
+      ],
+      "inline_text": {
+        "prefix": "Rule of thumb:",
+        "prefix_color": "#D97706",
+        "text": "If you tell Claude the same thing daily, make it a skill.",
+        "text_color": "#292524"
+      },
+      "bottom_takeaway": {
+        "label": "Best use",
+        "body": "Turn repeatable instructions into reusable workflows instead of reprompting.",
+        "accent_color": "#D97706"
+      }
+    },
+    {
+      "type": "content_cards",
+      "pill": { "text": "HOOKS", "bg": "#ECFDF5", "fg": "#059669" },
+      "heading": "Hooks",
+      "subheading": "Deterministic automation. Shell commands, HTTP calls, or prompts that fire at specific lifecycle events.",
+      "cards": [
+        {
+          "title": "Four handler types",
+          "body": "Command hooks run shell scripts (JSON on stdin, exit codes control flow). HTTP hooks POST to endpoints for external integrations. Prompt hooks send a prompt to Claude for semantic yes/no evaluation. Agent hooks spawn a subagent with tool access for deep verification.",
+          "accent_color": "#059669"
+        },
+        {
+          "title": "Core lifecycle events",
+          "body": "PreToolUse: intercept before any tool runs. PostToolUse: react after execution (format, test, log). UserPromptSubmit: validate prompts before Claude sees them. SessionStart: inject environment context. Notification: Slack or desktop alerts.",
+          "accent_color": "#10B981"
+        }
+      ],
+      "insight": {
+        "label": "Key difference from Skills",
+        "body": "A skill is a suggestion Claude follows. A hook is a rule the system enforces. Hooks are guaranteed to fire every time, with no LLM discretion involved.",
+        "accent_color": "#059669",
+        "bg": "#ECFDF5"
+      },
+      "bottom_takeaway": {
+        "label": "Best use",
+        "body": "Reach for hooks when the system must enforce behavior, not just recommend it.",
+        "accent_color": "#059669"
+      }
+    },
+    {
+      "type": "content_cards",
+      "pill": { "text": "AGENTS", "bg": "#F5F3FF", "fg": "#7C3AED" },
+      "heading": "Subagents",
+      "subheading": "Isolated workers running in their own context windows. Preserve your main session by delegating.",
+      "cards": [
+        {
+          "title": "How they work",
+          "body": "Separate Claude instances with custom system prompts, tool restrictions, and independent permissions. Defined as .md files in .claude/agents/. Built-in agents include Explore (read-only search) and Plan (research for planning). Invoke with @agent-name or let Claude auto-delegate.",
+          "accent_color": "#7C3AED"
+        },
+        {
+          "title": "Memory + constraints",
+          "body": "Agents support persistent memory (MEMORY.md) scoped to project, user, or local. They can use Read, Write, Grep, and Glob. Key constraint: subagents report back to the parent but cannot talk to each other. For that, you need Agent Teams.",
+          "accent_color": "#8B5CF6"
+        }
+      ],
+      "insight": {
+        "label": "Context preservation tip",
+        "body": "If a task touches more than about five files, isolate it in a subagent. The research happens in a separate context, and your main session gets a clean summary back.",
+        "accent_color": "#7C3AED",
+        "bg": "#F5F3FF"
+      },
+      "bottom_takeaway": {
+        "label": "Best use",
+        "body": "Delegate research-heavy work so your main thread stays clean and focused.",
+        "accent_color": "#7C3AED"
+      }
+    },
+    {
+      "type": "content_cards",
+      "pill": { "text": "AGENT TEAMS", "bg": "#F5F3FF", "fg": "#8B5CF6" },
+      "heading": "Agent Teams",
+      "date_line": "Launched February 2026 with Opus 4.6",
+      "subheading": "Multiple independent Claude sessions that coordinate, message each other, and divide work in parallel.",
+      "cards": [
+        {
+          "title": "How they differ from Subagents",
+          "body": "A lead session assigns tasks. Teammates claim work from a shared task list and communicate directly. Unlike subagents, teammates collaborate and share findings without the main agent as intermediary. They can message each other and challenge assumptions.",
+          "accent_color": "#7C3AED"
+        },
+        {
+          "title": "When to use Teams vs Subagents",
+          "body": "Use subagents for quick, focused workers that report back. Use Agent Teams when teammates need to share findings and coordinate collaboratively. Common pattern: planning phase to define roles, then parallel teams for execution.",
+          "accent_color": "#A78BFA"
+        }
+      ],
+      "insight": {
+        "label": "Cost note",
+        "body": "A 3-teammate team uses roughly 3-4x the tokens of a single sequential session. The time savings on complex tasks more than justify the cost.",
+        "accent_color": "#7C3AED",
+        "bg": "#F5F3FF"
+      },
+      "bottom_takeaway": {
+        "label": "Best use",
+        "body": "Use teams only when agents need to coordinate laterally, not just report upward.",
+        "accent_color": "#7C3AED"
+      }
+    },
+    {
+      "type": "content_cards",
+      "pill": { "text": "PLUGINS", "bg": "#FEF2F2", "fg": "#DC2626" },
+      "heading": "Plugins",
+      "subheading": "The distribution layer. Bundle skills, agents, hooks, and MCP servers into one shareable package.",
+      "cards": [
+        {
+          "title": "What goes in a plugin",
+          "body": "A .claude-plugin/plugin.json manifest (name, description, author) plus any combination of skills, agents, hooks, and MCP configs. Install a plugin and everything merges: hooks combine, commands appear in autocomplete, skills activate automatically.",
+          "accent_color": "#DC2626"
+        },
+        {
+          "title": "When to reach for a plugin",
+          "body": "When you need to package multiple extension types for team distribution. A standalone skill handles single workflows. A plugin packages an entire domain: agents alongside skills, with hooks for quality gates and MCP servers for external integrations.",
+          "accent_color": "#EF4444"
+        }
+      ],
+      "insight": {
+        "label": "Skills vs Plugins",
+        "body": "Skills are the easier entry point. You can bundle binaries, call subagents, and build real workflows from a single skill. Reach for a plugin when distributing multiple agents with hooks across a team.",
+        "accent_color": "#DC2626",
+        "bg": "#FEF2F2"
+      },
+      "bottom_takeaway": {
+        "label": "Best use",
+        "body": "Package the whole operating model when teammates need the same setup fast.",
+        "accent_color": "#DC2626"
+      }
+    },
+    {
+      "type": "comparison_table",
+      "heading": "Side-by-Side",
+      "subheading": "How each extension point compares at a glance.",
+      "columns": [
+        { "header": "Type", "width": 74 },
+        { "header": "Trigger", "width": 104 },
+        { "header": "Context", "width": 102 },
+        { "header": "Deterministic", "width": 104 },
+        { "header": "Best for", "width": 132 }
+      ],
+      "rows": [
+        {
+          "label": "Rules",
+          "color": "#92400E",
+          "cells": ["Auto (every session)", "Main context", "Yes", "Conventions, constraints"]
+        },
+        {
+          "label": "Skills",
+          "color": "#D97706",
+          "cells": ["Auto or /slash", "Main or forked", "No (LLM-driven)", "Reusable workflows"]
+        },
+        {
+          "label": "Hooks",
+          "color": "#059669",
+          "cells": ["Lifecycle events", "External process", "Yes (guaranteed)", "Enforcement, automation"]
+        },
+        {
+          "label": "Agents",
+          "color": "#7C3AED",
+          "cells": ["@mention or auto", "Isolated context", "No (delegated)", "Parallel, heavy tasks"]
+        },
+        {
+          "label": "Commands",
+          "color": "#2563EB",
+          "cells": ["Merged into Skills", "Same as Skills", "Same as Skills", "Legacy (use Skills)"]
+        },
+        {
+          "label": "Plugins",
+          "color": "#DC2626",
+          "cells": ["Install once", "All of above", "Mixed", "Team distribution"]
+        }
+      ],
+      "bottom_takeaway": {
+        "label": "Read it fast",
+        "body": "Rules are always-on, hooks are enforced, agents isolate work, plugins distribute it.",
+        "accent_color": "#92400E"
+      }
+    },
+    {
+      "type": "flow_diagram",
+      "heading": "How They Layer Together",
+      "subheading": "A real-world workflow combining multiple extensions.",
+      "steps": [
+        {
+          "label": "CLAUDE.md",
+          "description": "Contains implementation standards: \"write tests first\", \"never commit until I approve\".",
+          "color": "#92400E"
+        },
+        {
+          "label": "Skill",
+          "description": "update-documentation skill activates automatically after implementations complete.",
+          "color": "#D97706"
+        },
+        {
+          "label": "Subagent",
+          "description": "Heavy implementation runs in isolated context. Main session stays focused on planning.",
+          "color": "#7C3AED"
+        },
+        {
+          "label": "Hook",
+          "description": "PreToolUse hook blocks commits containing .env or .pem files. Guaranteed enforcement.",
+          "color": "#059669"
+        },
+        {
+          "label": "Plugin",
+          "description": "The entire stack packaged as a plugin. New team members install once and get everything.",
+          "color": "#DC2626"
+        }
+      ]
+    },
+    {
+      "type": "decision_framework",
+      "heading": "Decision Framework",
+      "subheading": "Choose the right extension point for your use case.",
+      "decisions": [
+        {
+          "question": "Repeating the same correction?",
+          "answer": "Add it to CLAUDE.md",
+          "color": "#92400E"
+        },
+        {
+          "question": "Same workflow daily?",
+          "answer": "Make it a Skill",
+          "color": "#D97706"
+        },
+        {
+          "question": "Need guaranteed enforcement?",
+          "answer": "Write a Hook",
+          "color": "#059669"
+        },
+        {
+          "question": "Task touches 5+ files?",
+          "answer": "Delegate to a Subagent",
+          "color": "#7C3AED"
+        },
+        {
+          "question": "Agents need to coordinate?",
+          "answer": "Use Agent Teams",
+          "color": "#8B5CF6"
+        },
+        {
+          "question": "Distributing to teammates?",
+          "answer": "Package as a Plugin",
+          "color": "#DC2626"
+        }
+      ],
+      "bottom_takeaway": {
+        "label": "Shortcut",
+        "body": "If it is repeated, formalize it. If it must be enforced, automate it.",
+        "accent_color": "#92400E"
+      }
+    },
+    {
+      "type": "closing_dark",
+      "quote_lines": ["Start simple.", "Add complexity", "only when you", "need it."],
+      "summary_lines": [
+        "Rules define what Claude knows.",
+        "Skills define what Claude does.",
+        "Hooks enforce the guardrails.",
+        "Agents handle the heavy lifting.",
+        "Plugins package it all for your team."
+      ],
+      "geometric_accent": {
+        "color": "#D97706",
+        "alpha": 0.06,
+        "x_pct": 0.5,
+        "y_pct": 0.65,
+        "w_pct": 0.6,
+        "h": 60
+      }
+    }
+  ]
+}
