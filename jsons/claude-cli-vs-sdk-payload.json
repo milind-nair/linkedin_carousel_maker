@@ -1,0 +1,384 @@
+{
+  "meta": {
+    "title": "Claude CLI vs Claude Agent SDK",
+    "author": "Milind Nair",
+    "output_filename": "claude-cli-vs-sdk-carousel.pdf"
+  },
+  "global_styles": {
+    "dimensions": {
+      "width": 612,
+      "height": 765,
+      "margin": 48,
+      "viewport_band_height": 108
+    },
+    "colors": {
+      "bg": "#FFFDF5",
+      "bg_dark": "#1A1814",
+      "primary": "#D97706",
+      "primary_dark": "#92400E",
+      "primary_light": "#FEF3C7",
+      "accent": "#F59E0B",
+      "text": "#292524",
+      "text_light": "#F5F5F4",
+      "muted": "#A8A29E",
+      "stone": "#78716C",
+      "card_bg": "#FFFFFF",
+      "divider": "#E7E5E4",
+      "green": "#059669",
+      "green_bg": "#ECFDF5",
+      "purple": "#7C3AED",
+      "purple_bg": "#F5F3FF",
+      "blue": "#2563EB",
+      "red": "#DC2626",
+      "red_bg": "#FEF2F2"
+    },
+    "fonts": {
+      "display": {
+        "name": "Lora",
+        "candidates": [
+          "/usr/share/fonts/truetype/google-fonts/Lora-Variable.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+        ],
+        "fallback": "Helvetica-Bold"
+      },
+      "body": {
+        "name": "Poppins",
+        "candidates": [
+          "/usr/share/fonts/truetype/google-fonts/Poppins-Light.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+        ],
+        "fallback": "Helvetica"
+      },
+      "bold": {
+        "name": "PoppinsBold",
+        "candidates": [
+          "/usr/share/fonts/truetype/google-fonts/Poppins-Bold.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+        ],
+        "fallback": "Helvetica-Bold"
+      },
+      "mono": {
+        "name": "LiberationMono",
+        "candidates": [
+          "/usr/share/fonts/truetype/liberation/LiberationMono-Regular.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
+        ],
+        "fallback": "Courier"
+      }
+    },
+    "brand": {
+      "name": "MILIND NAIR",
+      "icon_path": "brandicon.png",
+      "show_footer": true
+    }
+  },
+  "slides": [
+    {
+      "type": "title_dark",
+      "kicker": "CLAUDE INTERFACES",
+      "title_lines": [
+        "Claude CLI or",
+        "Claude Agent SDK?",
+        "Most developers",
+        "pick the wrong one."
+      ],
+      "subtitle_lines": [
+        "They run on the same engine.",
+        "The real choice is who stays in the loop."
+      ],
+      "cta_text": "Swipe for the decision map \u2192",
+      "geometric_accent": {
+        "color": "#2563EB",
+        "alpha": 0.07,
+        "x_pct": 0.56,
+        "y_pct": 0.72,
+        "w_pct": 0.58,
+        "h": 84
+      }
+    },
+    {
+      "type": "content_cards",
+      "pill": {
+        "text": "SAME ENGINE",
+        "bg": "#ECFDF5",
+        "fg": "#059669"
+      },
+      "heading": "Two Interfaces, One Runtime",
+      "subheading": "The CLI and the SDK are not separate products. The SDK is direct access to the same runtime the CLI wraps.",
+      "cards": [
+        {
+          "title": "CLI = visible surface",
+          "body": "The CLI packages the runtime as a terminal experience. You prompt, Claude acts, you review, and then you decide the next move.",
+          "accent_color": "#D97706"
+        },
+        {
+          "title": "SDK = direct interface",
+          "body": "The SDK exposes that same engine to your code. Your application can start runs, react to events, and handle output programmatically.",
+          "accent_color": "#2563EB"
+        }
+      ],
+      "insight": {
+        "label": "Why this matters",
+        "body": "Once you see one engine with two interfaces, the choice stops being about features and starts being about orchestration.",
+        "accent_color": "#059669",
+        "bg": "#ECFDF5"
+      },
+      "bottom_takeaway": {
+        "label": "Decision lens",
+        "body": "Pick based on who needs control: a human or your application.",
+        "accent_color": "#059669"
+      }
+    },
+    {
+      "type": "content_cards",
+      "pill": {
+        "text": "CLI",
+        "bg": "#FEF3C7",
+        "fg": "#92400E"
+      },
+      "heading": "What the CLI Is Actually For",
+      "subheading": "Human-in-the-loop, interactive work where the developer remains the orchestrator.",
+      "cards": [
+        {
+          "title": "How it works",
+          "body": "You type a prompt, Claude takes actions, and you review what happened before the next step. The loop is conversational, exploratory, and fast to steer.",
+          "accent_color": "#D97706"
+        },
+        {
+          "title": "Best fit",
+          "body": "Exploring a codebase, investigating a bug, running one-off automation, or iterating on an agent workflow before you formalize it in software.",
+          "accent_color": "#92400E"
+        }
+      ],
+      "inline_text": {
+        "prefix": "Mental model:",
+        "prefix_color": "#D97706",
+        "text": "The terminal is the interface, and the human is the control plane.",
+        "text_color": "#292524"
+      },
+      "bottom_takeaway": {
+        "label": "Use CLI when",
+        "body": "A person is actively driving the session in real time.",
+        "accent_color": "#D97706"
+      }
+    },
+    {
+      "type": "content_cards",
+      "pill": {
+        "text": "SDK",
+        "bg": "#EFF6FF",
+        "fg": "#2563EB"
+      },
+      "heading": "What the SDK Is Actually For",
+      "subheading": "Application-in-the-loop work where your software drives the agent and reacts to what it does.",
+      "cards": [
+        {
+          "title": "How it works",
+          "body": "No human has to sit in a terminal. Your code starts the run, listens for events, and decides what should happen next.",
+          "accent_color": "#2563EB"
+        },
+        {
+          "title": "Best fit",
+          "body": "Embedding an agent in a product, routing outputs into other systems, enforcing programmatic rules, or running autonomous flows.",
+          "accent_color": "#1D4ED8"
+        }
+      ],
+      "insight": {
+        "label": "Shift in responsibility",
+        "body": "The SDK turns the runtime into a component inside your system, not a tool a developer manually operates.",
+        "accent_color": "#2563EB",
+        "bg": "#EFF6FF"
+      },
+      "bottom_takeaway": {
+        "label": "Use SDK when",
+        "body": "Software needs to respond to agent behavior programmatically.",
+        "accent_color": "#2563EB"
+      }
+    },
+    {
+      "type": "decision_framework",
+      "heading": "The Real Decision Criteria",
+      "subheading": "One question matters more than every feature checklist.",
+      "decisions": [
+        {
+          "question": "Does something in your application need to happen based on what the agent does?",
+          "answer": "If yes, choose the SDK.",
+          "color": "#2563EB"
+        },
+        {
+          "question": "Is a human simply driving the work from a terminal and reviewing the results?",
+          "answer": "If yes, choose the CLI.",
+          "color": "#D97706"
+        }
+      ],
+      "bottom_takeaway": {
+        "label": "Shortcut",
+        "body": "This is a control-flow decision, not a quality ranking.",
+        "accent_color": "#059669"
+      }
+    },
+    {
+      "type": "grid_cards",
+      "heading": "Where CLI Breaks Down",
+      "subheading": "The CLI is great at interaction, but it is not a programmable interception layer.",
+      "columns": 2,
+      "items": [
+        {
+          "label": "No hooks",
+          "trigger": "Before tool runs",
+          "description": "You cannot intercept a tool call before execution.",
+          "color": "#DC2626"
+        },
+        {
+          "label": "No safety gate",
+          "trigger": "Block actions",
+          "description": "You cannot stop destructive behavior from code mid-run.",
+          "color": "#DC2626"
+        },
+        {
+          "label": "No injected logic",
+          "trigger": "Between steps",
+          "description": "You cannot insert custom code between agent steps.",
+          "color": "#D97706"
+        },
+        {
+          "label": "Human-led by design",
+          "trigger": "Terminal loop",
+          "description": "The developer still coordinates the session.",
+          "color": "#92400E"
+        }
+      ],
+      "bottom_takeaway": {
+        "label": "Key limit",
+        "body": "If your system must intervene inside the loop, the CLI is the wrong abstraction.",
+        "accent_color": "#DC2626",
+        "bg": "#FEF2F2"
+      }
+    },
+    {
+      "type": "grid_cards",
+      "heading": "Where SDK Breaks Down",
+      "subheading": "The SDK opens the loop, but it also hands you the product and runtime responsibilities.",
+      "columns": 2,
+      "items": [
+        {
+          "label": "Build the UI",
+          "trigger": "Interface",
+          "description": "There is no built-in end-user surface.",
+          "color": "#2563EB"
+        },
+        {
+          "label": "Own persistence",
+          "trigger": "State",
+          "description": "Session continuity across restarts is your job.",
+          "color": "#2563EB"
+        },
+        {
+          "label": "Design review",
+          "trigger": "Human in loop",
+          "description": "There is no default pause-and-approve workflow.",
+          "color": "#1D4ED8"
+        },
+        {
+          "label": "Run the system",
+          "trigger": "Ops",
+          "description": "Auth, limits, logging, and deployment live in your app.",
+          "color": "#1E40AF"
+        }
+      ],
+      "bottom_takeaway": {
+        "label": "Tradeoff",
+        "body": "The SDK gives control by moving infrastructure and UX decisions onto you.",
+        "accent_color": "#2563EB",
+        "bg": "#EFF6FF"
+      }
+    },
+    {
+      "type": "comparison_table",
+      "heading": "A Practical Decision Map",
+      "subheading": "Neither is better. Each is right for a different operating model.",
+      "columns": [
+        {
+          "header": "Type",
+          "width": 72
+        },
+        {
+          "header": "Choose It When",
+          "width": 184
+        },
+        {
+          "header": "Use It For",
+          "width": 260
+        }
+      ],
+      "rows": [
+        {
+          "label": "CLI",
+          "color": "#D97706",
+          "cells": [
+            "A human is steering the work live.",
+            "Codebase exploration, one-off automation, and fast prototyping."
+          ]
+        },
+        {
+          "label": "SDK",
+          "color": "#2563EB",
+          "cells": [
+            "Your software must react to agent behavior.",
+            "User-facing agents, tool control, autonomous runs, safety rules, and logging."
+          ]
+        }
+      ],
+      "bottom_takeaway": {
+        "label": "Read it fast",
+        "body": "CLI is for interactive exploration. SDK is for embedded programmatic control.",
+        "accent_color": "#059669"
+      }
+    },
+    {
+      "type": "flow_diagram",
+      "heading": "You Can Use Both",
+      "subheading": "A common path is CLI first for validation, then SDK for operational deployment on the same runtime.",
+      "steps": [
+        {
+          "label": "Validate",
+          "description": "Use the CLI to explore prompts, tool behavior, and boundaries while a human is still shaping what good looks like.",
+          "color": "#D97706"
+        },
+        {
+          "label": "Stabilize",
+          "description": "Once the behavior feels right, identify the events, policies, and outputs your system will need to own.",
+          "color": "#059669"
+        },
+        {
+          "label": "Deploy",
+          "description": "Move to the SDK when your product or workflow needs to drive the agent and act on the results autonomously.",
+          "color": "#2563EB"
+        }
+      ]
+    },
+    {
+      "type": "closing_dark",
+      "quote_lines": [
+        "Pick the tool",
+        "that matches",
+        "the question",
+        "you are asking."
+      ],
+      "summary_lines": [
+        "CLI: What do you want Claude to do?",
+        "SDK: What should your system do with what Claude does?",
+        "Different questions. Different interfaces. Same runtime."
+      ],
+      "geometric_accent": {
+        "color": "#2563EB",
+        "alpha": 0.06,
+        "x_pct": 0.5,
+        "y_pct": 0.66,
+        "w_pct": 0.6,
+        "h": 64
+      }
+    }
+  ]
+}
