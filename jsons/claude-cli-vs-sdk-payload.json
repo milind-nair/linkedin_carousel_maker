@@ -199,22 +199,32 @@
     {
       "type": "decision_framework",
       "heading": "The Real Decision Criteria",
-      "subheading": "One question matters more than every feature checklist.",
+      "subheading": "Start with the control-flow question, then use these tie-breakers.",
       "decisions": [
         {
-          "question": "Does something in your application need to happen based on what the agent does?",
+          "question": "Does your application need to react to what the agent does?",
           "answer": "If yes, choose the SDK.",
           "color": "#2563EB"
         },
         {
-          "question": "Is a human simply driving the work from a terminal and reviewing the results?",
+          "question": "Does code need to approve, block, or route actions?",
+          "answer": "If yes, choose the SDK.",
+          "color": "#2563EB"
+        },
+        {
+          "question": "Is a human steering the work from a terminal?",
           "answer": "If yes, choose the CLI.",
+          "color": "#D97706"
+        },
+        {
+          "question": "Are you still prototyping the workflow manually?",
+          "answer": "If yes, start with the CLI.",
           "color": "#D97706"
         }
       ],
       "bottom_takeaway": {
         "label": "Shortcut",
-        "body": "This is a control-flow decision, not a quality ranking.",
+        "body": "Prototype in CLI. Move to SDK once software must govern the run.",
         "accent_color": "#059669"
       }
     },
