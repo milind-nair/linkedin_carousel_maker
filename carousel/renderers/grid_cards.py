@@ -36,8 +36,11 @@ def render_grid_cards(slide: dict, ctx):
 
     # Subheading
     subheading = slide.get("subheading")
+    subheading_end = H - 119
     if subheading:
-        draw_text(c, M, H - 100, subheading, cfg.fonts.body, 11, cfg.colors.stone)
+        subheading_end = draw_text(
+            c, M, H - 100, subheading, cfg.fonts.bold, 13, cfg.colors.stone, max_w=CW
+        )
 
     # Grid items
     columns = slide.get("columns", 2)
@@ -45,7 +48,7 @@ def render_grid_cards(slide: dict, ctx):
     gap = 14
     card_w = (CW - gap * (columns - 1)) / columns
     card_h = 98
-    start_y = H - 138
+    start_y = subheading_end - 19
 
     for i, item in enumerate(items):
         col = i % columns
@@ -61,23 +64,24 @@ def render_grid_cards(slide: dict, ctx):
         c.setFillColor(color)
         c.rect(x, y + card_h - 3, card_w, 3, fill=1, stroke=0)
         # Label
-        c.setFont(cfg.fonts.bold, 14)
+        c.setFont(cfg.fonts.bold, 15)
         c.setFillColor(color)
-        c.drawString(x + 14, y + card_h - 24, item.get("label", ""))
+        c.drawString(x + 14, y + card_h - 26, item.get("label", ""))
         # Trigger
         trigger = item.get("trigger")
         if trigger:
-            c.setFont(cfg.fonts.mono, 8.5)
+            c.setFont(cfg.fonts.bold, 10)
             c.setFillColor(cfg.colors.muted)
-            c.drawString(x + 14, y + card_h - 40, trigger)
+            c.drawString(x + 14, y + card_h - 44, trigger)
         # Description
         desc = item.get("description", "")
-        c.setFont(cfg.fonts.body, 9.5)
+        c.setFont(cfg.fonts.body, 10.5)
         c.setFillColor(cfg.colors.text)
-        dy = y + card_h - 56
-        for dline in desc.split("\n"):
-            c.drawString(x + 14, dy, dline)
-            dy -= 14
+        dy = y + card_h - 62
+        for raw_line in desc.split("\n"):
+            for dline in wrap(raw_line, cfg.fonts.body, 10.5, card_w - 28):
+                c.drawString(x + 14, dy, dline)
+                dy -= 14
 
     # Bottom takeaway
     bt = slide.get("bottom_takeaway")

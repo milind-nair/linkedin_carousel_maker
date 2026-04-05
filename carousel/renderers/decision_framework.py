@@ -5,7 +5,7 @@ from __future__ import annotations
 from reportlab.lib.colors import white
 
 from carousel.registry import register
-from carousel.primitives import bottom_takeaway as draw_bottom_takeaway
+from carousel.primitives import bottom_takeaway as draw_bottom_takeaway, draw_text
 from carousel.layout import decorate_page, draw_footer
 from carousel.illustrations import draw_illustration
 
@@ -17,6 +17,7 @@ def render_decision_framework(slide: dict, ctx):
     cfg = ctx.config
     W, H = cfg.width, cfg.height
     M = cfg.margin
+    CW = cfg.content_width
 
     # Background
     c.setFillColor(cfg.colors.bg)
@@ -37,14 +38,15 @@ def render_decision_framework(slide: dict, ctx):
 
     # Subheading
     subheading = slide.get("subheading")
+    subheading_end = H - 115
     if subheading:
-        c.setFont(cfg.fonts.body, 11)
-        c.setFillColor(cfg.colors.stone)
-        c.drawString(M, H - 96, subheading)
+        subheading_end = draw_text(
+            c, M, H - 96, subheading, cfg.fonts.bold, 13, cfg.colors.stone, max_w=CW
+        )
 
     # Decisions
     decisions = slide.get("decisions", [])
-    y = H - 126
+    y = subheading_end - 35
     row_gap = 80
 
     for i, dec in enumerate(decisions):

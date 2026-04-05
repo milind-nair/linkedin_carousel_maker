@@ -5,7 +5,7 @@ from __future__ import annotations
 from reportlab.lib.colors import white
 
 from carousel.registry import register
-from carousel.primitives import rrect, pill, wrap
+from carousel.primitives import rrect, pill, wrap, draw_text
 from carousel.layout import decorate_page, draw_footer
 from carousel.illustrations import draw_illustration
 
@@ -38,14 +38,15 @@ def render_flow_diagram(slide: dict, ctx):
 
     # Subheading
     subheading = slide.get("subheading")
+    subheading_end = H - 115
     if subheading:
-        c.setFont(cfg.fonts.body, 11)
-        c.setFillColor(cfg.colors.stone)
-        c.drawString(M, H - 96, subheading)
+        subheading_end = draw_text(
+            c, M, H - 96, subheading, cfg.fonts.bold, 13, cfg.colors.stone, max_w=CW
+        )
 
     # Flow steps
     steps = slide.get("steps", [])
-    y = H - 120
+    y = subheading_end - 5
     item_h = 96
     gap = 16
 
@@ -59,13 +60,13 @@ def render_flow_diagram(slide: dict, ctx):
         c.rect(M, iy, 4, item_h, fill=1, stroke=0)
 
         # Pill label
-        pill(c, M + 16, iy + item_h - 22, step.get("label", ""),
-             color, white, font_bold=cfg.fonts.bold, size=9)
+        pill(c, M + 16, iy + item_h - 28, step.get("label", ""),
+             color, white, font_bold=cfg.fonts.bold, size=11)
 
         # Description
         desc = step.get("description", "")
         desc_lines = wrap(desc, cfg.fonts.body, 10.5, CW - 36)
-        dy = iy + item_h - 44
+        dy = iy + item_h - 50
         c.setFont(cfg.fonts.body, 10.5)
         c.setFillColor(cfg.colors.text)
         for dl in desc_lines:

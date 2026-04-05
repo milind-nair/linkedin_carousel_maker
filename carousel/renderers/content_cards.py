@@ -73,7 +73,7 @@ def render_content_cards(slide: dict, ctx):
     content_top = sub_y - (31 if date_line else 32)
     if subheading:
         content_top = draw_text(
-            c, M, sub_y, subheading, cfg.fonts.body, 11, cfg.colors.stone, max_w=CW
+            c, M, sub_y, subheading, cfg.fonts.bold, 13, cfg.colors.stone, max_w=CW
         ) - content_gap_after_text
 
     cards = slide.get("cards", [])

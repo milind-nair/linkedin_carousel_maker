@@ -65,14 +65,14 @@ def rrect(c, x: float, y: float, w: float, h: float, r: float,
 
 
 def pill(c, x: float, y: float, text: str, bg: Color, fg: Color,
-         font_bold: str = "Helvetica-Bold", size: float = 9) -> float:
+         font_bold: str = "Helvetica-Bold", size: float = 12) -> float:
     """Draw a pill badge. y = baseline of text inside. Returns pill width."""
     tw = pdfmetrics.stringWidth(text, font_bold, size)
-    pw, ph = tw + 16, size + 10
-    rrect(c, x, y - 4, pw, ph, ph / 2, fill=bg)
+    pw, ph = tw + 20, size + 14
+    rrect(c, x, y - 5, pw, ph, ph / 2, fill=bg)
     c.setFont(font_bold, size)
     c.setFillColor(fg)
-    c.drawString(x + 8, y + 1, text)
+    c.drawString(x + 10, y + 1, text)
     return pw
 
 
