@@ -25,6 +25,7 @@ carousel/
   primitives.py        Drawing helpers: wrap, draw_text, rrect, pill, card_block, insight_block, bottom_takeaway
   layout.py            Page-level: new_page, decorate_page, draw_footer
   images.py            Image loading (local + URL), fit modes, clipping
+  illustrations.py     Vector glyph registry + unified draw_illustration() helper
   registry.py          @register("type") decorator + dispatch
   renderers/
     __init__.py        Auto-imports all renderer modules
@@ -75,6 +76,23 @@ carousel/
 - Use `carousel/images.py` → `draw_image(ctx, ImageSpec(...))` in any renderer
 - `ImageSpec` supports: `fit_mode` (contain/cover/stretch/original), `clip` (none/circle/rounded_rect), `anchor`, `opacity`
 
+### Adding illustrations (vector glyphs or images) to a slide type
+- `content_cards`, `grid_cards`, `comparison_table`, `flow_diagram`, and `decision_framework` all accept an optional `illustration: IllustrationSpec` field
+- `IllustrationSpec` requires exactly one of `glyph` (named vector glyph) or `source` (image path/URL)
+- Built-in glyphs in `carousel/illustrations.py`: `terminal`, `code_brackets`, `gear`, `split_path`, `lock`, `flow_arrow`, `chip`, `wrench`, `scale`, `layers`
+- To add a new glyph: write a function `(canvas, x, y, size, color)` in `illustrations.py` and register it in the `GLYPHS` dict
+- Positioning: `position` is `top_right` (default), `top_left`, or `custom` (pairs with `x`/`y`)
+- Renderer usage: `from carousel.illustrations import draw_illustration; draw_illustration(ctx, slide.get("illustration"), cfg.colors.primary)`
+
+JSON example:
+```json
+"illustration": { "glyph": "terminal", "size": 54, "color": "#D97706" }
+```
+or
+```json
+"illustration": { "source": "assets/logo.png", "size": 64, "position": "top_right" }
+```
+
 ## JSON payload structure
 
 See `example_payload.json` for the full 12-slide reference. Minimal payload:
@@ -114,13 +132,13 @@ All `global_styles` fields are optional — brand defaults are baked into the sc
 
 | Type | JSON `type` value | Key fields |
 |------|-------------------|------------|
-| Title (dark bg) | `title_dark` | `kicker`, `title_lines`, `subtitle_lines`, `cta_text`, `geometric_accent` |
-| Content cards | `content_cards` | `pill`, `heading`, `subheading`, `cards[]`, `insight`, `inline_text`, `bottom_takeaway` |
-| Grid cards | `grid_cards` | `heading`, `subheading`, `columns`, `items[]`, `bottom_takeaway` |
-| Comparison table | `comparison_table` | `heading`, `columns[]`, `rows[]`, `bottom_takeaway` |
-| Flow diagram | `flow_diagram` | `heading`, `subheading`, `steps[]` |
-| Decision framework | `decision_framework` | `heading`, `decisions[]`, `bottom_takeaway` |
-| Closing (dark bg) | `closing_dark` | `quote_lines`, `summary_lines`, `geometric_accent` |
+| Title (dark bg) | `title_dark` | `kicker`, `title_lines`, `subtitle_lines`, `cta_text`, `geometric_accent`, `image` |
+| Content cards | `content_cards` | `pill`, `heading`, `subheading`, `cards[]`, `insight`, `inline_text`, `bottom_takeaway`, `illustration` |
+| Grid cards | `grid_cards` | `heading`, `subheading`, `columns`, `items[]`, `bottom_takeaway`, `illustration` |
+| Comparison table | `comparison_table` | `heading`, `columns[]`, `rows[]`, `bottom_takeaway`, `illustration` |
+| Flow diagram | `flow_diagram` | `heading`, `subheading`, `steps[]`, `illustration` |
+| Decision framework | `decision_framework` | `heading`, `decisions[]`, `bottom_takeaway`, `illustration` |
+| Closing (dark bg) | `closing_dark` | `quote_lines`, `summary_lines`, `geometric_accent`, `image` |
 
 ## Original reference
 

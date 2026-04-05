@@ -95,6 +95,16 @@
         "y_pct": 0.72,
         "w_pct": 0.58,
         "h": 84
+      },
+      "image": {
+        "source": "../assets/cli-vs-sdk-hero.png",
+        "x": 166,
+        "y": 96,
+        "width": 280,
+        "height": 150,
+        "fit_mode": "contain",
+        "anchor": "bottom_left",
+        "opacity": 0.95
       }
     },
     {
@@ -103,6 +113,11 @@
         "text": "SAME ENGINE",
         "bg": "#ECFDF5",
         "fg": "#059669"
+      },
+      "illustration": {
+        "glyph": "split_path",
+        "size": 54,
+        "color": "#059669"
       },
       "heading": "Two Interfaces, One Runtime",
       "subheading": "The CLI and the SDK are not separate products. The SDK is direct access to the same runtime the CLI wraps.",
@@ -137,6 +152,11 @@
         "bg": "#FEF3C7",
         "fg": "#92400E"
       },
+      "illustration": {
+        "glyph": "terminal",
+        "size": 54,
+        "color": "#D97706"
+      },
       "heading": "What the CLI Is Actually For",
       "subheading": "Human-in-the-loop, interactive work where the developer remains the orchestrator.",
       "cards": [
@@ -170,6 +190,11 @@
         "bg": "#EFF6FF",
         "fg": "#2563EB"
       },
+      "illustration": {
+        "glyph": "chip",
+        "size": 54,
+        "color": "#2563EB"
+      },
       "heading": "What the SDK Is Actually For",
       "subheading": "Application-in-the-loop work where your software drives the agent and reacts to what it does.",
       "cards": [
@@ -198,6 +223,11 @@
     },
     {
       "type": "decision_framework",
+      "illustration": {
+        "glyph": "scale",
+        "size": 54,
+        "color": "#059669"
+      },
       "heading": "The Real Decision Criteria",
       "subheading": "Start with the control-flow question, then use these tie-breakers.",
       "decisions": [
@@ -230,6 +260,11 @@
     },
     {
       "type": "grid_cards",
+      "illustration": {
+        "glyph": "lock",
+        "size": 52,
+        "color": "#DC2626"
+      },
       "heading": "Where CLI Breaks Down",
       "subheading": "The CLI is great at interaction, but it is not a programmable interception layer.",
       "columns": 2,
@@ -268,6 +303,11 @@
     },
     {
       "type": "grid_cards",
+      "illustration": {
+        "glyph": "wrench",
+        "size": 54,
+        "color": "#2563EB"
+      },
       "heading": "Where SDK Breaks Down",
       "subheading": "The SDK opens the loop, but it also hands you the product and runtime responsibilities.",
       "columns": 2,
@@ -306,6 +346,11 @@
     },
     {
       "type": "comparison_table",
+      "illustration": {
+        "glyph": "layers",
+        "size": 54,
+        "color": "#D97706"
+      },
       "heading": "A Practical Decision Map",
       "subheading": "Neither is better. Each is right for a different operating model.",
       "columns": [
@@ -338,6 +383,14 @@
             "Your software must react to agent behavior.",
             "User-facing agents, tool control, autonomous runs, safety rules, and logging."
           ]
+        },
+        {
+          "label": "Both",
+          "color": "#059669",
+          "cells": [
+            "You are productionizing a workflow you have already explored.",
+            "Prototype in the CLI, then ship via the SDK once the behavior is stable."
+          ]
         }
       ],
       "bottom_takeaway": {
@@ -348,6 +401,11 @@
     },
     {
       "type": "flow_diagram",
+      "illustration": {
+        "glyph": "flow_arrow",
+        "size": 58,
+        "color": "#059669"
+      },
       "heading": "You Can Use Both",
       "subheading": "A common path is CLI first for validation, then SDK for operational deployment on the same runtime.",
       "steps": [

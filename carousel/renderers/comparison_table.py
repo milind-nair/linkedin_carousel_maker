@@ -7,6 +7,7 @@ from reportlab.lib.colors import HexColor
 from carousel.registry import register
 from carousel.primitives import rrect, wrap, bottom_takeaway as draw_bottom_takeaway
 from carousel.layout import decorate_page, draw_footer
+from carousel.illustrations import draw_illustration
 
 
 @register("comparison_table")
@@ -22,6 +23,11 @@ def render_comparison_table(slide: dict, ctx):
     c.setFillColor(cfg.colors.bg)
     c.rect(0, 0, W, H, fill=1, stroke=0)
     decorate_page(ctx)
+
+    # Illustration (top-right)
+    ill = slide.get("illustration")
+    if ill:
+        draw_illustration(ctx, ill, cfg.colors.primary)
 
     # Heading
     heading = slide.get("heading", "")

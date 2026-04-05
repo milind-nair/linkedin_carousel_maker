@@ -7,6 +7,7 @@ from reportlab.lib.colors import white
 from carousel.registry import register
 from carousel.primitives import rrect, pill, wrap
 from carousel.layout import decorate_page, draw_footer
+from carousel.illustrations import draw_illustration
 
 
 @register("flow_diagram")
@@ -22,6 +23,11 @@ def render_flow_diagram(slide: dict, ctx):
     c.setFillColor(cfg.colors.bg)
     c.rect(0, 0, W, H, fill=1, stroke=0)
     decorate_page(ctx)
+
+    # Illustration (top-right)
+    ill = slide.get("illustration")
+    if ill:
+        draw_illustration(ctx, ill, cfg.colors.primary)
 
     # Heading
     heading = slide.get("heading", "")

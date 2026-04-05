@@ -14,6 +14,7 @@ from carousel.primitives import (
     pill,
 )
 from carousel.layout import draw_footer
+from carousel.illustrations import draw_illustration
 
 from reportlab.pdfbase import pdfmetrics
 
@@ -37,6 +38,11 @@ def render_content_cards(slide: dict, ctx):
     c.rect(0, 0, cfg.width, cfg.height, fill=1, stroke=0)
     from carousel.layout import decorate_page
     decorate_page(ctx)
+
+    # Illustration (drawn first so pill/heading can overlap if needed)
+    ill = slide.get("illustration")
+    if ill:
+        draw_illustration(ctx, ill, cfg.colors.primary)
 
     # Pill
     pill_spec = slide.get("pill")

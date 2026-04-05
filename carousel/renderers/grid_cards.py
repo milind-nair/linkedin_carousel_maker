@@ -5,6 +5,7 @@ from __future__ import annotations
 from carousel.registry import register
 from carousel.primitives import draw_text, rrect, pill, bottom_takeaway as draw_bottom_takeaway, wrap
 from carousel.layout import decorate_page, draw_footer
+from carousel.illustrations import draw_illustration
 
 
 @register("grid_cards")
@@ -20,6 +21,11 @@ def render_grid_cards(slide: dict, ctx):
     c.setFillColor(cfg.colors.bg)
     c.rect(0, 0, W, H, fill=1, stroke=0)
     decorate_page(ctx)
+
+    # Illustration (top-right)
+    ill = slide.get("illustration")
+    if ill:
+        draw_illustration(ctx, ill, cfg.colors.primary)
 
     # Heading
     heading = slide.get("heading", "")

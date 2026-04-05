@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 from typing import Annotated, Literal, Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 
 # ── Reusable sub-models ──
@@ -20,6 +20,29 @@ class ImageSpec(BaseModel):
     anchor: Literal[
         "top_left", "top_right", "center", "bottom_left", "bottom_right"
     ] = "bottom_left"
+
+
+class IllustrationSpec(BaseModel):
+    """Visual illustration: either a named vector glyph or an image file."""
+    glyph: Optional[str] = None          # e.g. "terminal", "gear", "lock"
+    source: Optional[str] = None         # image path or URL
+    size: float = 56                     # width in points
+    position: Literal["top_right", "top_left", "custom"] = "top_right"
+    x: Optional[float] = None            # used when position="custom"
+    y: Optional[float] = None
+    color: Optional[str] = None          # glyph stroke/fill; ignored for images
+    opacity: float = 1.0
+    fit_mode: Literal["contain", "cover", "stretch", "original"] = "contain"
+    clip: Literal["none", "circle", "rounded_rect"] = "none"
+    clip_radius: float = 6
+
+    @model_validator(mode="after")
+    def _exactly_one_source(self) -> "IllustrationSpec":
+        if bool(self.glyph) == bool(self.source):
+            raise ValueError(
+                "IllustrationSpec requires exactly one of 'glyph' or 'source'"
+            )
+        return self
 
 
 class GeometricAccent(BaseModel):
@@ -124,6 +147,7 @@ class ContentCardsSlide(BaseSlide):
     insight: Optional[InsightSpec] = None
     inline_text: Optional[InlineTextSpec] = None
     bottom_takeaway: Optional[BottomTakeawaySpec] = None
+    illustration: Optional[IllustrationSpec] = None
 
 
 class GridCardsSlide(BaseSlide):
@@ -133,6 +157,7 @@ class GridCardsSlide(BaseSlide):
     columns: int = 2
     items: list[GridItemSpec] = Field(default_factory=list)
     bottom_takeaway: Optional[BottomTakeawaySpec] = None
+    illustration: Optional[IllustrationSpec] = None
 
 
 class ComparisonTableSlide(BaseSlide):
@@ -142,6 +167,7 @@ class ComparisonTableSlide(BaseSlide):
     columns: list[TableColumnSpec] = Field(default_factory=list)
     rows: list[TableRowSpec] = Field(default_factory=list)
     bottom_takeaway: Optional[BottomTakeawaySpec] = None
+    illustration: Optional[IllustrationSpec] = None
 
 
 class FlowDiagramSlide(BaseSlide):
@@ -150,6 +176,7 @@ class FlowDiagramSlide(BaseSlide):
     subheading: Optional[str] = None
     steps: list[FlowStepSpec] = Field(default_factory=list)
     connector: str = "arrow_down"
+    illustration: Optional[IllustrationSpec] = None
 
 
 class DecisionFrameworkSlide(BaseSlide):
@@ -158,6 +185,7 @@ class DecisionFrameworkSlide(BaseSlide):
     subheading: Optional[str] = None
     decisions: list[DecisionSpec] = Field(default_factory=list)
     bottom_takeaway: Optional[BottomTakeawaySpec] = None
+    illustration: Optional[IllustrationSpec] = None
 
 
 class ClosingDarkSlide(BaseSlide):
