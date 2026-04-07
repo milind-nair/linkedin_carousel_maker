@@ -120,7 +120,7 @@
         "color": "#059669"
       },
       "heading": "Two Interfaces, One Runtime",
-      "subheading": "The CLI and the SDK are not separate products. The SDK is direct access to the same runtime the CLI wraps.",
+      "subheading": "The CLI and the SDK share one agent runtime. The CLI surfaces it as a terminal session, and the SDK exposes it directly to your application code.",
       "cards": [
         {
           "title": "CLI = visible surface",
@@ -265,38 +265,38 @@
         "size": 52,
         "color": "#DC2626"
       },
-      "heading": "Where CLI Breaks Down",
-      "subheading": "The CLI is great at interaction, but it is not a programmable interception layer.",
+      "heading": "Where CLI Integration Ends",
+      "subheading": "Claude Code supports hooks, though they run as external shell commands from settings.json, outside your application process.",
       "columns": 2,
       "items": [
         {
-          "label": "No hooks",
-          "trigger": "Before tool runs",
-          "description": "You cannot intercept a tool call before execution.",
+          "label": "Config-based",
+          "trigger": "Setup",
+          "description": "Hooks are declared in settings.json and execute as shell commands from your operating system.",
           "color": "#DC2626"
         },
         {
-          "label": "No safety gate",
-          "trigger": "Block actions",
-          "description": "You cannot stop destructive behavior from code mid-run.",
+          "label": "External policy",
+          "trigger": "Blocking",
+          "description": "PreToolUse hooks can block actions, with the blocking logic living in external shell scripts.",
           "color": "#DC2626"
         },
         {
-          "label": "No injected logic",
-          "trigger": "Between steps",
-          "description": "You cannot insert custom code between agent steps.",
+          "label": "Event-bound",
+          "trigger": "Interception",
+          "description": "Hooks fire at predefined lifecycle points, so your code never owns the agent loop itself.",
           "color": "#D97706"
         },
         {
-          "label": "Human-led by design",
-          "trigger": "Terminal loop",
-          "description": "The developer still coordinates the session.",
+          "label": "Terminal session",
+          "trigger": "Driver",
+          "description": "The session is built around a person driving the work from a terminal.",
           "color": "#92400E"
         }
       ],
       "bottom_takeaway": {
         "label": "Key limit",
-        "body": "If your system must intervene inside the loop, the CLI is the wrong abstraction.",
+        "body": "If your system must own the agent loop in-process, the CLI is the wrong abstraction.",
         "accent_color": "#DC2626",
         "bg": "#FEF2F2"
       }
