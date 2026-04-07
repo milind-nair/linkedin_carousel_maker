@@ -8,6 +8,7 @@ from carousel.registry import register
 from carousel.primitives import rrect, pill, wrap, draw_text
 from carousel.layout import decorate_page, draw_footer
 from carousel.illustrations import draw_illustration
+from carousel.images import draw_image
 
 
 @register("flow_diagram")
@@ -23,6 +24,12 @@ def render_flow_diagram(slide: dict, ctx):
     c.setFillColor(cfg.colors.bg)
     c.rect(0, 0, W, H, fill=1, stroke=0)
     decorate_page(ctx)
+
+    # Image (drawn early so content renders on top)
+    img = slide.get("image")
+    if img:
+        from carousel.schema import ImageSpec
+        draw_image(ctx, ImageSpec(**img) if isinstance(img, dict) else img)
 
     # Illustration (top-right)
     ill = slide.get("illustration")

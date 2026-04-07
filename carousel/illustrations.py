@@ -377,8 +377,8 @@ def _compute_position(ctx: "DrawContext", spec: dict) -> tuple[float, float]:
         return spec.get("x", M), spec.get("y", H - M - size)
     if pos == "top_left":
         return M, H - M - size
-    # top_right (default) — aligned with pill band
-    return W - M - size, H - 62 - size * 0.2
+    # top_right (default) — above heading line (H - 70), bottom of glyph clears it
+    return W - M - size, H - 70 + 8
 
 
 def draw_illustration(

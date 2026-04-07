@@ -148,6 +148,7 @@ class ContentCardsSlide(BaseSlide):
     inline_text: Optional[InlineTextSpec] = None
     bottom_takeaway: Optional[BottomTakeawaySpec] = None
     illustration: Optional[IllustrationSpec] = None
+    image: Optional[ImageSpec] = None
 
 
 class GridCardsSlide(BaseSlide):
@@ -158,6 +159,7 @@ class GridCardsSlide(BaseSlide):
     items: list[GridItemSpec] = Field(default_factory=list)
     bottom_takeaway: Optional[BottomTakeawaySpec] = None
     illustration: Optional[IllustrationSpec] = None
+    image: Optional[ImageSpec] = None
 
 
 class ComparisonTableSlide(BaseSlide):
@@ -168,6 +170,7 @@ class ComparisonTableSlide(BaseSlide):
     rows: list[TableRowSpec] = Field(default_factory=list)
     bottom_takeaway: Optional[BottomTakeawaySpec] = None
     illustration: Optional[IllustrationSpec] = None
+    image: Optional[ImageSpec] = None
 
 
 class FlowDiagramSlide(BaseSlide):
@@ -177,6 +180,7 @@ class FlowDiagramSlide(BaseSlide):
     steps: list[FlowStepSpec] = Field(default_factory=list)
     connector: str = "arrow_down"
     illustration: Optional[IllustrationSpec] = None
+    image: Optional[ImageSpec] = None
 
 
 class DecisionFrameworkSlide(BaseSlide):
@@ -186,6 +190,7 @@ class DecisionFrameworkSlide(BaseSlide):
     decisions: list[DecisionSpec] = Field(default_factory=list)
     bottom_takeaway: Optional[BottomTakeawaySpec] = None
     illustration: Optional[IllustrationSpec] = None
+    image: Optional[ImageSpec] = None
 
 
 class ClosingDarkSlide(BaseSlide):

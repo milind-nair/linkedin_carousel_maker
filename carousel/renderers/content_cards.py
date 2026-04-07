@@ -15,6 +15,7 @@ from carousel.primitives import (
 )
 from carousel.layout import draw_footer
 from carousel.illustrations import draw_illustration
+from carousel.images import draw_image
 
 from reportlab.pdfbase import pdfmetrics
 
@@ -38,6 +39,12 @@ def render_content_cards(slide: dict, ctx):
     c.rect(0, 0, cfg.width, cfg.height, fill=1, stroke=0)
     from carousel.layout import decorate_page
     decorate_page(ctx)
+
+    # Image (drawn early so content renders on top)
+    img = slide.get("image")
+    if img:
+        from carousel.schema import ImageSpec
+        draw_image(ctx, ImageSpec(**img) if isinstance(img, dict) else img)
 
     # Illustration (drawn first so pill/heading can overlap if needed)
     ill = slide.get("illustration")
@@ -186,8 +193,7 @@ def render_content_cards(slide: dict, ctx):
             extra_gap = gap_growth / gap_count
         else:
             gap_growth = 0.0
-        used_extra = block_growth + gap_growth
-        start_offset = (extra_space - used_extra) / 2
+        start_offset = 0
     else:
         start_offset = 0.0
 

@@ -5,9 +5,10 @@ from __future__ import annotations
 from reportlab.lib.colors import white
 
 from carousel.registry import register
-from carousel.primitives import bottom_takeaway as draw_bottom_takeaway, draw_text
+from carousel.primitives import bottom_takeaway as draw_bottom_takeaway, draw_text, wrap
 from carousel.layout import decorate_page, draw_footer
 from carousel.illustrations import draw_illustration
+from carousel.images import draw_image
 
 
 @register("decision_framework")
@@ -23,6 +24,12 @@ def render_decision_framework(slide: dict, ctx):
     c.setFillColor(cfg.colors.bg)
     c.rect(0, 0, W, H, fill=1, stroke=0)
     decorate_page(ctx)
+
+    # Image (drawn early so content renders on top)
+    img = slide.get("image")
+    if img:
+        from carousel.schema import ImageSpec
+        draw_image(ctx, ImageSpec(**img) if isinstance(img, dict) else img)
 
     # Illustration (top-right)
     ill = slide.get("illustration")
@@ -49,34 +56,47 @@ def render_decision_framework(slide: dict, ctx):
     y = subheading_end - 35
     row_gap = 80
 
+    text_x = M + 42
+    max_text_w = W - M - text_x
+
     for i, dec in enumerate(decisions):
         color = cfg.colors.resolve(dec.get("color", "#D97706"))
 
         # Number circle
-        cx, cy = M + 16, y + 2
+        cx, cy = text_x - 26, y + 2
         c.setFillColor(color)
         c.circle(cx, cy, 14, fill=1, stroke=0)
         c.setFont(cfg.fonts.bold, 12)
         c.setFillColor(white)
         c.drawCentredString(cx, cy - 4, str(i + 1))
 
-        # Question
+        # Question (wrapped)
+        q_lines = wrap(dec.get("question", ""), cfg.fonts.body, 12, max_text_w)
         c.setFont(cfg.fonts.body, 12)
         c.setFillColor(cfg.colors.text)
-        c.drawString(M + 42, y + 4, dec.get("question", ""))
+        qy = y + 4
+        for ql in q_lines:
+            c.drawString(text_x, qy, ql)
+            qy -= 15
 
-        # Answer
+        # Answer (wrapped)
+        answer_text = "\u2192  " + dec.get("answer", "")
+        a_lines = wrap(answer_text, cfg.fonts.bold, 13, max_text_w)
         c.setFont(cfg.fonts.bold, 13)
         c.setFillColor(color)
-        c.drawString(M + 42, y - 16, "\u2192  " + dec.get("answer", ""))
+        ay = qy - 4
+        for al in a_lines:
+            c.drawString(text_x, ay, al)
+            ay -= 16
 
         # Divider
         if i < len(decisions) - 1:
             c.setStrokeColor(cfg.colors.divider)
             c.setLineWidth(0.4)
-            c.line(M + 42, y - 36, W - M, y - 36)
+            div_y = ay - 8
+            c.line(text_x, div_y, W - M, div_y)
 
-        y -= row_gap
+        y = ay - 16
 
     # Bottom takeaway
     bt = slide.get("bottom_takeaway")

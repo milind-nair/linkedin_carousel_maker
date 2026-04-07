@@ -6,6 +6,7 @@ from carousel.registry import register
 from carousel.primitives import draw_text, rrect, pill, bottom_takeaway as draw_bottom_takeaway, wrap
 from carousel.layout import decorate_page, draw_footer
 from carousel.illustrations import draw_illustration
+from carousel.images import draw_image
 
 
 @register("grid_cards")
@@ -22,6 +23,12 @@ def render_grid_cards(slide: dict, ctx):
     c.rect(0, 0, W, H, fill=1, stroke=0)
     decorate_page(ctx)
 
+    # Image (drawn early so content renders on top)
+    img = slide.get("image")
+    if img:
+        from carousel.schema import ImageSpec
+        draw_image(ctx, ImageSpec(**img) if isinstance(img, dict) else img)
+
     # Illustration (top-right)
     ill = slide.get("illustration")
     if ill:
@@ -30,7 +37,7 @@ def render_grid_cards(slide: dict, ctx):
     # Heading
     heading = slide.get("heading", "")
     if heading:
-        c.setFont(cfg.fonts.display, 28)
+        c.setFont(cfg.fonts.display, 26)
         c.setFillColor(cfg.colors.primary_dark)
         c.drawString(M, H - 70, heading)
 
