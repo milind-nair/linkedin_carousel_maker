@@ -33,6 +33,12 @@ def render_closing_dark(slide: dict, ctx):
                W * ga.get("w_pct", 0.6), ga.get("h", 60), fill=1, stroke=0)
         c.restoreState()
 
+    # Optional image (drawn before text so it sits behind)
+    img = slide.get("image")
+    if img:
+        from carousel.schema import ImageSpec
+        draw_image(ctx, ImageSpec(**img) if isinstance(img, dict) else img)
+
     # Amber bar motif
     c.setFillColor(cfg.colors.accent)
     c.rect(M, H - 120, 40, 4, fill=1, stroke=0)
@@ -52,11 +58,5 @@ def render_closing_dark(slide: dict, ctx):
         c.setFillColor(cfg.colors.muted)
         c.drawString(M, y, line)
         y -= 22
-
-    # Optional image
-    img = slide.get("image")
-    if img:
-        from carousel.schema import ImageSpec
-        draw_image(ctx, ImageSpec(**img) if isinstance(img, dict) else img)
 
     draw_footer(ctx, dark=True)
