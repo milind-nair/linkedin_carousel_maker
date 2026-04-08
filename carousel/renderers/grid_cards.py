@@ -49,13 +49,19 @@ def render_grid_cards(slide: dict, ctx):
             c, M, H - 100, subheading, cfg.fonts.bold, 13, cfg.colors.stone, max_w=CW
         )
 
-    # Grid items
+    # Grid items — dynamic card height based on available space
     columns = slide.get("columns", 2)
     items = slide.get("items", [])
     gap = 14
     card_w = (CW - gap * (columns - 1)) / columns
-    card_h = 98
-    start_y = subheading_end - 19
+
+    bt = slide.get("bottom_takeaway")
+    rows = -(-len(items) // columns)  # ceiling division
+    top_y = subheading_end - 19
+    bottom_y = 100 if bt else 60
+    available = top_y - bottom_y
+    card_h = max(80, (available - gap * (rows - 1)) / rows) if rows else 98
+    start_y = top_y
 
     for i, item in enumerate(items):
         col = i % columns
@@ -82,13 +88,13 @@ def render_grid_cards(slide: dict, ctx):
             c.drawString(x + 14, y + card_h - 44, trigger)
         # Description
         desc = item.get("description", "")
-        c.setFont(cfg.fonts.body, 10.5)
+        c.setFont(cfg.fonts.body, 12)
         c.setFillColor(cfg.colors.text)
         dy = y + card_h - 62
         for raw_line in desc.split("\n"):
-            for dline in wrap(raw_line, cfg.fonts.body, 10.5, card_w - 28):
+            for dline in wrap(raw_line, cfg.fonts.body, 12, card_w - 28):
                 c.drawString(x + 14, dy, dline)
-                dy -= 14
+                dy -= 15
 
     # Bottom takeaway
     bt = slide.get("bottom_takeaway")

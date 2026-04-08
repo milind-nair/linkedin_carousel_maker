@@ -193,10 +193,10 @@ def measure_bottom_takeaway_height(
     fixed-layout renderers. Content cards can opt into an expandable block.
     """
     if not expand:
-        return 58
+        return 64
     cfg = ctx.config
-    body_lines = wrap(body_text, cfg.fonts.body, 10, cfg.content_width - 32)
-    return max(58, 38 + len(body_lines) * 12)
+    body_lines = wrap(body_text, cfg.fonts.body, 11.5, cfg.content_width - 32)
+    return max(64, 40 + len(body_lines) * 14)
 
 
 def bottom_takeaway(ctx: "DrawContext", accent_color: Color,
@@ -208,22 +208,22 @@ def bottom_takeaway(ctx: "DrawContext", accent_color: Color,
     if bg is None:
         bg = HexColor("#FFFEF7")
 
-    body_lines = wrap(body_text, cfg.fonts.body, 10, cfg.content_width - 32)
+    body_lines = wrap(body_text, cfg.fonts.body, 11.5, cfg.content_width - 32)
     block_h = measure_bottom_takeaway_height(ctx, body_text, expand=expand)
 
     rrect(c, cfg.margin, y_bottom, cfg.content_width, block_h, 6,
           fill=bg, stroke=cfg.colors.divider, sw=0.4)
     c.setFillColor(accent_color)
     c.rect(cfg.margin, y_bottom, 4, block_h, fill=1, stroke=0)
-    c.setFont(cfg.fonts.bold, 10)
+    c.setFont(cfg.fonts.bold, 12)
     c.setFillColor(accent_color)
     top = y_bottom + block_h
-    c.drawString(cfg.margin + 16, top - 21, label.upper())
-    c.setFont(cfg.fonts.body, 10)
+    c.drawString(cfg.margin + 16, top - 22, label.upper())
+    c.setFont(cfg.fonts.body, 11.5)
     c.setFillColor(cfg.colors.text)
     text_x = cfg.margin + 16
-    text_y = top - 38
+    text_y = top - 40
     for line in body_lines:
         c.drawString(text_x, text_y, line)
-        text_y -= 12
+        text_y -= 14
     return y_bottom

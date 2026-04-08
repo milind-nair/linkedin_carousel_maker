@@ -51,14 +51,33 @@ def render_decision_framework(slide: dict, ctx):
             c, M, H - 96, subheading, cfg.fonts.bold, 13, cfg.colors.stone, max_w=CW
         )
 
-    # Decisions
+    # Decisions — two-pass: measure then draw
     decisions = slide.get("decisions", [])
-    y = subheading_end - 35
-    row_gap = 80
-
     text_x = M + 42
     max_text_w = W - M - text_x
 
+    # Pass 1: measure each decision block height
+    block_heights = []
+    for dec in decisions:
+        q_lines = wrap(dec.get("question", ""), cfg.fonts.bold, 15, max_text_w)
+        answer_text = "\u2192  " + dec.get("answer", "")
+        a_lines = wrap(answer_text, cfg.fonts.body, 13.5, max_text_w)
+        q_h = len(q_lines) * 19
+        a_h = len(a_lines) * 17
+        block_h = q_h + 4 + a_h  # question + gap + answer
+        block_heights.append(block_h)
+
+    # Available vertical space
+    top_y = subheading_end - 30
+    bt = slide.get("bottom_takeaway")
+    bottom_y = 100 if bt else 60
+    available = top_y - bottom_y
+    total_content = sum(block_heights)
+    n = len(decisions)
+    gap = max(12, (available - total_content) / max(n, 1)) if n else 0
+
+    # Pass 2: draw decisions with even spacing
+    y = top_y
     for i, dec in enumerate(decisions):
         color = cfg.colors.resolve(dec.get("color", "#D97706"))
 
@@ -70,33 +89,33 @@ def render_decision_framework(slide: dict, ctx):
         c.setFillColor(white)
         c.drawCentredString(cx, cy - 4, str(i + 1))
 
-        # Question (wrapped)
-        q_lines = wrap(dec.get("question", ""), cfg.fonts.body, 12, max_text_w)
-        c.setFont(cfg.fonts.body, 12)
+        # Question (wrapped, bold 15pt)
+        q_lines = wrap(dec.get("question", ""), cfg.fonts.bold, 15, max_text_w)
+        c.setFont(cfg.fonts.bold, 15)
         c.setFillColor(cfg.colors.text)
         qy = y + 4
         for ql in q_lines:
             c.drawString(text_x, qy, ql)
-            qy -= 15
+            qy -= 19
 
-        # Answer (wrapped)
+        # Answer (wrapped, body 13.5pt)
         answer_text = "\u2192  " + dec.get("answer", "")
-        a_lines = wrap(answer_text, cfg.fonts.bold, 13, max_text_w)
-        c.setFont(cfg.fonts.bold, 13)
+        a_lines = wrap(answer_text, cfg.fonts.body, 13.5, max_text_w)
+        c.setFont(cfg.fonts.body, 13.5)
         c.setFillColor(color)
         ay = qy - 4
         for al in a_lines:
             c.drawString(text_x, ay, al)
             ay -= 16
 
-        # Divider
+        # Divider between decisions
         if i < len(decisions) - 1:
+            div_y = ay - gap * 0.35
             c.setStrokeColor(cfg.colors.divider)
             c.setLineWidth(0.4)
-            div_y = ay - 8
             c.line(text_x, div_y, W - M, div_y)
 
-        y = ay - 16
+        y = ay - gap
 
     # Bottom takeaway
     bt = slide.get("bottom_takeaway")

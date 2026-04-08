@@ -6,7 +6,10 @@ Usage:
 """
 
 import sys
+from pathlib import Path
 from carousel.pipeline import render_carousel
+
+OUTPUTS_DIR = Path(__file__).resolve().parent / "outputs"
 
 
 def main():
@@ -15,7 +18,11 @@ def main():
         sys.exit(1)
 
     payload_path = sys.argv[1]
-    output_path = sys.argv[2] if len(sys.argv) > 2 else None
+    if len(sys.argv) > 2:
+        output_path = sys.argv[2]
+    else:
+        OUTPUTS_DIR.mkdir(exist_ok=True)
+        output_path = str(OUTPUTS_DIR / (Path(payload_path).stem + ".pdf"))
     render_carousel(payload_path, output_path)
 
 
