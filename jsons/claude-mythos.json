@@ -330,16 +330,6 @@
         "glyph": "split_path",
         "size": 54,
         "color": "#7C3AED"
-      },
-      "image": {
-        "source": "../assets/claude-mythos/crossroads.png",
-        "x": 131,
-        "y": 110,
-        "width": 350,
-        "height": 280,
-        "fit_mode": "contain",
-        "anchor": "bottom_left",
-        "opacity": 0.85
       }
     },
     {

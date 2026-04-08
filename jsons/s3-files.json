@@ -212,7 +212,7 @@
       ],
       "bottom_takeaway": {
         "label": "Watch out",
-        "body": "All writes route through the EFS cache at $0.06/GB. For write-heavy workloads, this cost adds up quickly. The 32KB minimum per operation also penalizes small-file metadata workloads.",
+        "body": "All writes route through EFS at $0.06/GB. Write-heavy workloads get expensive fast.",
         "accent_color": "#DC2626",
         "bg": "#FEF2F2"
       },
