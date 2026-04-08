@@ -16,13 +16,15 @@ from carousel.registry import render_slide
 import carousel.renderers  # noqa: F401
 
 
-def render_carousel(payload_path: str, output_path: str | None = None):
+def render_carousel(payload_path: str, output_path: str | None = None,
+                    instagram: bool = False):
     """Load a JSON payload and render it to a PDF carousel.
 
     Args:
         payload_path: Path to the JSON payload file.
         output_path: Optional override for the output PDF path.
                      Defaults to meta.output_filename in the payload dir.
+        instagram: If True, scale canvas to 1080x1350 (Instagram 4:5).
     """
     payload_file = Path(payload_path).resolve()
     base_dir = payload_file.parent
@@ -57,8 +59,17 @@ def render_carousel(payload_path: str, output_path: str | None = None):
     if output_path is None:
         output_path = str(base_dir / payload.meta.output_filename)
 
+    # Instagram mode: scale canvas up while keeping coordinate system at 612x765
+    if instagram:
+        ig_w, ig_h = 1080, 1350
+        scale_x = ig_w / cfg.width
+        scale_y = ig_h / cfg.height
+        page_size = (ig_w, ig_h)
+    else:
+        page_size = (cfg.width, cfg.height)
+
     # Create canvas
-    c = canvas.Canvas(output_path, pagesize=(cfg.width, cfg.height))
+    c = canvas.Canvas(output_path, pagesize=page_size)
 
     ctx = DrawContext(canvas=c, config=cfg, base_dir=str(base_dir))
 
@@ -68,12 +79,14 @@ def render_carousel(payload_path: str, output_path: str | None = None):
         slide_dict = slide.model_dump()
 
         if i == 0:
-            # First page: canvas already created with initial page
-            # Just set page size (already set by Canvas constructor)
             pass
         else:
             c.showPage()
-            c.setPageSize((cfg.width, cfg.height))
+            c.setPageSize(page_size)
+
+        # Instagram: scale so renderers draw at original coordinates
+        if instagram:
+            c.scale(scale_x, scale_y)
 
         # Apply per-slide style overrides
         slide_ctx = ctx.with_overrides(slide_dict.get("style_overrides", {}))

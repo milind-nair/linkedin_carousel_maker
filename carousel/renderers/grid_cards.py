@@ -58,9 +58,14 @@ def render_grid_cards(slide: dict, ctx):
     bt = slide.get("bottom_takeaway")
     rows = -(-len(items) // columns)  # ceiling division
     top_y = subheading_end - 19
-    bottom_y = 100 if bt else 60
+    if bt:
+        from carousel.primitives import measure_bottom_takeaway_height
+        bt_h = measure_bottom_takeaway_height(ctx, bt.get("body", ""))
+        bottom_y = 54 + bt_h + 16
+    else:
+        bottom_y = 60
     available = top_y - bottom_y
-    card_h = max(80, (available - gap * (rows - 1)) / rows) if rows else 98
+    card_h = max(80, min(130, (available - gap * (rows - 1)) / rows)) if rows else 98
     start_y = top_y
 
     for i, item in enumerate(items):
