@@ -1,0 +1,378 @@
+{
+  "meta": {
+    "title": "Claude Mythos",
+    "author": "Milind Nair",
+    "output_filename": "claude-mythos.pdf"
+  },
+  "global_styles": {
+    "dimensions": {
+      "width": 612,
+      "height": 765,
+      "margin": 48,
+      "viewport_band_height": 108
+    },
+    "colors": {
+      "bg": "#FFFDF5",
+      "bg_dark": "#1A1814",
+      "primary": "#D97706",
+      "primary_dark": "#92400E",
+      "primary_light": "#FEF3C7",
+      "accent": "#F59E0B",
+      "text": "#292524",
+      "text_light": "#F5F5F4",
+      "muted": "#A8A29E",
+      "stone": "#78716C",
+      "card_bg": "#FFFFFF",
+      "divider": "#E7E5E4",
+      "green": "#059669",
+      "green_bg": "#ECFDF5",
+      "purple": "#7C3AED",
+      "purple_bg": "#F5F3FF",
+      "blue": "#2563EB",
+      "red": "#DC2626",
+      "red_bg": "#FEF2F2"
+    },
+    "fonts": {
+      "display": {
+        "name": "Lora",
+        "candidates": [
+          "/usr/share/fonts/truetype/google-fonts/Lora-Variable.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+        ],
+        "fallback": "Helvetica-Bold"
+      },
+      "body": {
+        "name": "Poppins",
+        "candidates": [
+          "/usr/share/fonts/truetype/google-fonts/Poppins-Light.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+        ],
+        "fallback": "Helvetica"
+      },
+      "bold": {
+        "name": "PoppinsBold",
+        "candidates": [
+          "/usr/share/fonts/truetype/google-fonts/Poppins-Bold.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+        ],
+        "fallback": "Helvetica-Bold"
+      },
+      "mono": {
+        "name": "LiberationMono",
+        "candidates": [
+          "/usr/share/fonts/truetype/liberation/LiberationMono-Regular.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
+        ],
+        "fallback": "Courier"
+      }
+    },
+    "brand": {
+      "name": "MILIND NAIR",
+      "icon_path": "brandicon.png",
+      "show_footer": true
+    }
+  },
+  "slides": [
+    {
+      "type": "title_dark",
+      "kicker": "CLAUDE MYTHOS",
+      "title_lines": [
+        "Anthropic Built",
+        "an AI So Powerful",
+        "It Won't Release It"
+      ],
+      "subtitle_lines": [
+        "Claude Mythos found thousands of zero-day",
+        "vulnerabilities in weeks. Here's what that means."
+      ],
+      "cta_text": "Swipe to learn more \u2192",
+      "geometric_accent": {
+        "color": "#D97706",
+        "alpha": 0.07,
+        "x_pct": 0.56,
+        "y_pct": 0.72,
+        "w_pct": 0.58,
+        "h": 84
+      },
+      "image": {
+        "source": "../assets/claude-mythos/hero.png",
+        "x": 120,
+        "y": 120,
+        "width": 420,
+        "height": 225,
+        "fit_mode": "contain",
+        "anchor": "bottom_left",
+        "opacity": 0.9
+      }
+    },
+    {
+      "type": "content_cards",
+      "pill": {
+        "text": "THE MODEL",
+        "bg": "#FEF3C7",
+        "fg": "#92400E"
+      },
+      "heading": "What Is Claude Mythos?",
+      "cards": [
+        {
+          "title": "General-Purpose, Not Security-Specific",
+          "body": "Mythos Preview is the most capable model Anthropic has ever built. Its cybersecurity skills were not trained in directly. They emerged from strong coding and reasoning capabilities at scale.",
+          "accent_color": "#D97706"
+        }
+      ],
+      "bottom_takeaway": {
+        "label": "Key Point",
+        "body": "Anthropic calls it a \"step change\" in performance. The security capability is a byproduct of general intelligence.",
+        "accent_color": "#D97706"
+      },
+      "illustration": {
+        "glyph": "chip",
+        "size": 54,
+        "color": "#D97706"
+      },
+      "image": {
+        "source": "../assets/claude-mythos/brain-network.png",
+        "x": 131,
+        "y": 120,
+        "width": 350,
+        "height": 280,
+        "fit_mode": "contain",
+        "anchor": "bottom_left",
+        "opacity": 0.85
+      }
+    },
+    {
+      "type": "grid_cards",
+      "heading": "The Benchmarks",
+      "subheading": "Mythos Preview vs. Claude Opus 4.6 across four major evaluations.",
+      "columns": 2,
+      "items": [
+        {
+          "label": "SWE-bench Verified",
+          "trigger": "93.9%",
+          "description": "Up from 80.8% on Opus 4.6. A 13-point jump on real-world software engineering tasks.",
+          "color": "#D97706"
+        },
+        {
+          "label": "SWE-bench Pro",
+          "trigger": "77.8%",
+          "description": "Up from 53.4% on Opus 4.6. The largest absolute gain across all benchmarks.",
+          "color": "#D97706"
+        },
+        {
+          "label": "CyberGym",
+          "trigger": "83.1%",
+          "description": "Up from 66.6% on Opus 4.6. Purpose-built to test offensive and defensive security skills.",
+          "color": "#DC2626"
+        },
+        {
+          "label": "Humanity's Last Exam",
+          "trigger": "56.8%",
+          "description": "Up from 40.0% on Opus 4.6. The hardest general reasoning benchmark available today.",
+          "color": "#7C3AED"
+        }
+      ],
+      "bottom_takeaway": {
+        "label": "Pattern",
+        "body": "Every benchmark shows a double-digit improvement over the previous best Anthropic model.",
+        "accent_color": "#D97706"
+      },
+      "image": {
+        "source": "../assets/claude-mythos/benchmarks.png",
+        "x": 131,
+        "y": 110,
+        "width": 350,
+        "height": 250,
+        "fit_mode": "contain",
+        "anchor": "bottom_left",
+        "opacity": 0.85
+      }
+    },
+    {
+      "type": "content_cards",
+      "pill": {
+        "text": "CAPABILITIES",
+        "bg": "#FEF2F2",
+        "fg": "#DC2626"
+      },
+      "heading": "What Mythos Actually Found",
+      "cards": [
+        {
+          "title": "Thousands of Zero-Days",
+          "body": "Critical vulnerabilities in every major OS and browser. Some undetected for decades, including a 27-year-old flaw in OpenBSD.",
+          "accent_color": "#DC2626"
+        },
+        {
+          "title": "A Full Exploit Chain",
+          "body": "Chained four vulnerabilities into a working browser exploit: JIT heap spray, renderer escape, OS sandbox bypass, and privilege escalation.",
+          "accent_color": "#DC2626"
+        }
+      ],
+      "bottom_takeaway": {
+        "label": "Scale",
+        "body": "These capabilities previously required elite teams working for months.",
+        "accent_color": "#DC2626",
+        "bg": "#FEF2F2"
+      },
+      "image": {
+        "source": "../assets/claude-mythos/exploit-chain.png",
+        "x": 131,
+        "y": 110,
+        "width": 350,
+        "height": 250,
+        "fit_mode": "contain",
+        "anchor": "bottom_left",
+        "opacity": 0.85
+      }
+    },
+    {
+      "type": "flow_diagram",
+      "heading": "Why Anthropic Won't Release It",
+      "subheading": "The same capabilities that find vulnerabilities can also exploit them.",
+      "steps": [
+        {
+          "label": "Finding Vulnerabilities",
+          "description": "Mythos discovers zero-days at a speed and scale no human team can match.",
+          "color": "#DC2626"
+        },
+        {
+          "label": "Dual-Use Risk",
+          "description": "The skills required for defense are identical to those required for attack.",
+          "color": "#DC2626"
+        },
+        {
+          "label": "Restricted Access Only",
+          "description": "Anthropic limits Mythos to vetted organizations doing defensive security work.",
+          "color": "#059669"
+        }
+      ],
+      "illustration": {
+        "glyph": "lock",
+        "size": 54,
+        "color": "#DC2626"
+      },
+      "image": {
+        "source": "../assets/claude-mythos/shield.png",
+        "x": 131,
+        "y": 110,
+        "width": 350,
+        "height": 250,
+        "fit_mode": "contain",
+        "anchor": "bottom_left",
+        "opacity": 0.85
+      }
+    },
+    {
+      "type": "content_cards",
+      "pill": {
+        "text": "GLASSWING",
+        "bg": "#ECFDF5",
+        "fg": "#059669"
+      },
+      "heading": "Project Glasswing",
+      "cards": [
+        {
+          "title": "Industry-Wide Defensive Access",
+          "body": "AWS, Apple, Microsoft, Google, CrowdStrike, Palo Alto Networks, and roughly 40 additional organizations now have access to Mythos for defensive security work. Named after the glasswing butterfly (Greta oto), the initiative aims to secure critical open-source infrastructure before attackers can exploit the same class of AI capabilities.",
+          "accent_color": "#059669"
+        }
+      ],
+      "bottom_takeaway": {
+        "label": "Commitment",
+        "body": "Anthropic has pledged $100M in compute credits to fund the effort. Coordinated defense at this scale is unprecedented.",
+        "accent_color": "#059669",
+        "bg": "#ECFDF5"
+      },
+      "illustration": {
+        "glyph": "layers",
+        "size": 54,
+        "color": "#059669"
+      },
+      "image": {
+        "source": "../assets/claude-mythos/glasswing.png",
+        "x": 131,
+        "y": 120,
+        "width": 350,
+        "height": 280,
+        "fit_mode": "contain",
+        "anchor": "bottom_left",
+        "opacity": 0.85
+      }
+    },
+    {
+      "type": "decision_framework",
+      "heading": "What This Means For You",
+      "decisions": [
+        {
+          "question": "If you maintain open-source software?",
+          "answer": "Expect Glasswing-sourced vulnerability reports and patches in the coming months. The volume will be higher than anything the ecosystem has processed before.",
+          "color": "#7C3AED"
+        },
+        {
+          "question": "If you run a security team?",
+          "answer": "Prepare for a significant wave of CVEs that will need triage and prioritization. The bugs are real and many are critical.",
+          "color": "#7C3AED"
+        },
+        {
+          "question": "If you build with AI?",
+          "answer": "Dual-use risk is no longer a theoretical concern. Model capabilities now outpace the guardrails designed to contain them.",
+          "color": "#7C3AED"
+        }
+      ],
+      "bottom_takeaway": {
+        "label": "Bottom Line",
+        "body": "The question is whether defenders move fast enough to stay ahead.",
+        "accent_color": "#7C3AED",
+        "bg": "#F5F3FF"
+      },
+      "illustration": {
+        "glyph": "split_path",
+        "size": 54,
+        "color": "#7C3AED"
+      },
+      "image": {
+        "source": "../assets/claude-mythos/crossroads.png",
+        "x": 131,
+        "y": 110,
+        "width": 350,
+        "height": 280,
+        "fit_mode": "contain",
+        "anchor": "bottom_left",
+        "opacity": 0.85
+      }
+    },
+    {
+      "type": "closing_dark",
+      "quote_lines": [
+        "The best defense",
+        "against AI-powered attacks",
+        "is AI-powered defense."
+      ],
+      "summary_lines": [
+        "Mythos Preview is the most capable model Anthropic has ever built.",
+        "It found thousands of zero-day vulnerabilities in weeks.",
+        "Project Glasswing gives 50+ organizations defensive access.",
+        "Anthropic committed $100M to fund the initiative."
+      ],
+      "geometric_accent": {
+        "color": "#D97706",
+        "alpha": 0.06,
+        "x_pct": 0.5,
+        "y_pct": 0.66,
+        "w_pct": 0.6,
+        "h": 64
+      },
+      "image": {
+        "source": "../assets/claude-mythos/closing.png",
+        "x": 106,
+        "y": 100,
+        "width": 400,
+        "height": 300,
+        "fit_mode": "contain",
+        "anchor": "bottom_left",
+        "opacity": 0.3
+      }
+    }
+  ]
+}
