@@ -28,6 +28,30 @@ def wrap(text: str, font: str, size: float, max_w: float) -> list[str]:
     return lines
 
 
+def draw_heading(
+    ctx: "DrawContext", x: float, y: float, text: str,
+    max_size: float = 26, min_size: float = 18, color: Color | None = None,
+) -> float:
+    """Draw a slide heading that auto-shrinks to fit content width.
+
+    Slide headings must never overflow. This helper measures the text at
+    max_size and steps the font size down until the single-line width fits
+    inside the content area, bounded by min_size. Returns the size used.
+    """
+    cfg = ctx.config
+    c = ctx.canvas
+    if color is None:
+        color = cfg.colors.primary_dark
+    max_w = cfg.content_width
+    size = max_size
+    while size > min_size and pdfmetrics.stringWidth(text, cfg.fonts.display, size) > max_w:
+        size -= 0.5
+    c.setFont(cfg.fonts.display, size)
+    c.setFillColor(color)
+    c.drawString(x, y, text)
+    return size
+
+
 def draw_text(
     c, x: float, y: float, text: str, font: str, size: float, color: Color,
     max_w: float | None = None, leading: float | None = None, align: str = "left",

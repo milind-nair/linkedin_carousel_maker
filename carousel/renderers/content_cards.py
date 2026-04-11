@@ -6,6 +6,7 @@ from carousel.registry import register
 from carousel.primitives import (
     bottom_takeaway,
     card_block,
+    draw_heading,
     draw_text,
     insight_block,
     measure_bottom_takeaway_height,
@@ -61,9 +62,7 @@ def render_content_cards(slide: dict, ctx):
     # Heading
     heading = slide.get("heading", "")
     if heading:
-        c.setFont(cfg.fonts.display, 26)
-        c.setFillColor(cfg.colors.primary_dark)
-        c.drawString(M, H - 110, heading)
+        draw_heading(ctx, M, H - 110, heading)
 
     # Date line
     date_line = slide.get("date_line")

@@ -5,7 +5,7 @@ from __future__ import annotations
 from reportlab.lib.colors import white
 
 from carousel.registry import register
-from carousel.primitives import rrect, pill, wrap, draw_text
+from carousel.primitives import rrect, pill, wrap, draw_heading, draw_text
 from carousel.layout import decorate_page, draw_footer
 from carousel.illustrations import draw_illustration
 from carousel.images import draw_image
@@ -39,9 +39,7 @@ def render_flow_diagram(slide: dict, ctx):
     # Heading
     heading = slide.get("heading", "")
     if heading:
-        c.setFont(cfg.fonts.display, 26)
-        c.setFillColor(cfg.colors.primary_dark)
-        c.drawString(M, H - 70, heading)
+        draw_heading(ctx, M, H - 70, heading)
 
     # Subheading
     subheading = slide.get("subheading")

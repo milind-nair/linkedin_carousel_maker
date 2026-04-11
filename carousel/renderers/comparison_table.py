@@ -5,7 +5,7 @@ from __future__ import annotations
 from reportlab.lib.colors import HexColor
 
 from carousel.registry import register
-from carousel.primitives import rrect, wrap, bottom_takeaway as draw_bottom_takeaway, draw_text
+from carousel.primitives import rrect, wrap, bottom_takeaway as draw_bottom_takeaway, draw_heading, draw_text
 from carousel.layout import decorate_page, draw_footer
 from carousel.illustrations import draw_illustration
 from carousel.images import draw_image
@@ -39,9 +39,7 @@ def render_comparison_table(slide: dict, ctx):
     # Heading
     heading = slide.get("heading", "")
     if heading:
-        c.setFont(cfg.fonts.display, 26)
-        c.setFillColor(cfg.colors.primary_dark)
-        c.drawString(M, H - 70, heading)
+        draw_heading(ctx, M, H - 70, heading)
 
     # Subheading
     subheading = slide.get("subheading")
@@ -86,12 +84,17 @@ def render_comparison_table(slide: dict, ctx):
         rrect(c, table_x, row_bottom, CW, row_h, 4,
               fill=cfg.colors.card_bg, stroke=cfg.colors.stone, sw=1.0)
 
-        # Left colored accent + label
+        # Left colored accent + label (wraps within first column width)
         c.setFillColor(color)
         c.rect(table_x, row_bottom, 4, row_h, fill=1, stroke=0)
         c.setFont(cfg.fonts.bold, 11)
         c.setFillColor(color)
-        c.drawString(table_x + 8, row_top - 22, row.get("label", ""))
+        label_col_w = col_defs[0]["width"] if col_defs else 130
+        label_lines = wrap(row.get("label", ""), cfg.fonts.bold, 11, label_col_w - 14)
+        label_y = row_top - 22
+        for line in label_lines:
+            c.drawString(table_x + 8, label_y, line)
+            label_y -= 14
 
         # Cell values
         cells = row.get("cells", [])

@@ -5,7 +5,7 @@ from __future__ import annotations
 from reportlab.lib.colors import white
 
 from carousel.registry import register
-from carousel.primitives import bottom_takeaway as draw_bottom_takeaway, draw_text, wrap
+from carousel.primitives import bottom_takeaway as draw_bottom_takeaway, draw_heading, draw_text, wrap
 from carousel.layout import decorate_page, draw_footer
 from carousel.illustrations import draw_illustration
 from carousel.images import draw_image
@@ -17,7 +17,7 @@ def _measure_decisions(decisions, fonts, q_size, a_size, q_leading, a_leading, m
     for dec in decisions:
         q_lines = wrap(dec.get("question", ""), fonts.bold, q_size, max_text_w)
         answer_text = "\u2192  " + dec.get("answer", "")
-        a_lines = wrap(answer_text, fonts.body, a_size, max_text_w)
+        a_lines = wrap(answer_text, fonts.bold, a_size, max_text_w)
         q_h = len(q_lines) * q_leading
         a_h = len(a_lines) * a_leading
         block_heights.append(q_h + 4 + a_h)
@@ -52,9 +52,7 @@ def render_decision_framework(slide: dict, ctx):
     # Heading
     heading = slide.get("heading", "")
     if heading:
-        c.setFont(cfg.fonts.display, 26)
-        c.setFillColor(cfg.colors.primary_dark)
-        c.drawString(M, H - 70, heading)
+        draw_heading(ctx, M, H - 70, heading)
 
     # Subheading
     subheading = slide.get("subheading")
@@ -80,12 +78,13 @@ def render_decision_framework(slide: dict, ctx):
     available = top_y - bottom_y
     n = len(decisions)
 
-    # Try font sizes from large to small until content fits
+    # Try font sizes from large to small until content fits.
+    # Answers render in bold font (bumped from body) for stronger visibility.
     font_tiers = [
-        (15, 13.5, 19, 17),  # preferred
-        (14, 12.5, 17, 16),  # medium
-        (13, 12, 16, 15),    # compact
-        (12, 11, 15, 14),    # tight
+        (15, 14, 19, 18.5),  # preferred
+        (14, 13, 17, 17),    # medium
+        (13, 12, 16, 15.5),  # compact
+        (12, 11.5, 15, 14.5),  # tight
     ]
 
     q_size = a_size = q_leading = a_leading = 0
@@ -125,10 +124,10 @@ def render_decision_framework(slide: dict, ctx):
             c.drawString(text_x, qy, ql)
             qy -= q_leading
 
-        # Answer
+        # Answer (rendered bold for stronger emphasis)
         answer_text = "\u2192  " + dec.get("answer", "")
-        a_lines = wrap(answer_text, cfg.fonts.body, a_size, max_text_w)
-        c.setFont(cfg.fonts.body, a_size)
+        a_lines = wrap(answer_text, cfg.fonts.bold, a_size, max_text_w)
+        c.setFont(cfg.fonts.bold, a_size)
         c.setFillColor(color)
         ay = qy - 4
         for al in a_lines:

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from carousel.registry import register
-from carousel.primitives import draw_text, rrect, pill, bottom_takeaway as draw_bottom_takeaway, wrap
+from carousel.primitives import draw_heading, draw_text, rrect, pill, bottom_takeaway as draw_bottom_takeaway, wrap
 from carousel.layout import decorate_page, draw_footer
 from carousel.illustrations import draw_illustration
 from carousel.images import draw_image
@@ -37,9 +37,7 @@ def render_grid_cards(slide: dict, ctx):
     # Heading
     heading = slide.get("heading", "")
     if heading:
-        c.setFont(cfg.fonts.display, 26)
-        c.setFillColor(cfg.colors.primary_dark)
-        c.drawString(M, H - 70, heading)
+        draw_heading(ctx, M, H - 70, heading)
 
     # Subheading
     subheading = slide.get("subheading")
