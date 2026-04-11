@@ -129,6 +129,7 @@ class BaseSlide(BaseModel):
 
 class TitleDarkSlide(BaseSlide):
     type: Literal["title_dark"] = "title_dark"
+    theme: Optional[Literal["warm", "cool", "verdant"]] = None
     kicker: Optional[str] = None
     title_lines: list[str] = Field(default_factory=list)
     subtitle_lines: list[str] = Field(default_factory=list)
@@ -195,6 +196,7 @@ class DecisionFrameworkSlide(BaseSlide):
 
 class ClosingDarkSlide(BaseSlide):
     type: Literal["closing_dark"] = "closing_dark"
+    theme: Optional[Literal["warm", "cool", "verdant"]] = None
     quote_lines: list[str] = Field(default_factory=list)
     summary_lines: list[str] = Field(default_factory=list)
     geometric_accent: Optional[GeometricAccent] = None
@@ -278,6 +280,11 @@ class ColorsConfig(BaseModel):
     stone: str = "#78716C"
     card_bg: str = "#FFFFFF"
     divider: str = "#E7E5E4"
+    # Dark-slide theme colors (defaults = warm theme)
+    band: str = "#211D17"
+    band_stroke: str = "#2B2721"
+    separator_dark: str = "#333330"
+    icon_bg_dark: str = "#2A2720"
     # Semantic colors
     green: str = "#059669"
     green_bg: str = "#ECFDF5"

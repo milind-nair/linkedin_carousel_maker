@@ -22,6 +22,11 @@ class ColorPalette:
     stone: Color = field(default_factory=lambda: HexColor("#78716C"))
     card_bg: Color = field(default_factory=lambda: HexColor("#FFFFFF"))
     divider: Color = field(default_factory=lambda: HexColor("#E7E5E4"))
+    # Dark-slide theme colors (defaults = warm theme)
+    band: Color = field(default_factory=lambda: HexColor("#211D17"))
+    band_stroke: Color = field(default_factory=lambda: HexColor("#2B2721"))
+    separator_dark: Color = field(default_factory=lambda: HexColor("#333330"))
+    icon_bg_dark: Color = field(default_factory=lambda: HexColor("#2A2720"))
     green: Color = field(default_factory=lambda: HexColor("#059669"))
     green_bg: Color = field(default_factory=lambda: HexColor("#ECFDF5"))
     purple: Color = field(default_factory=lambda: HexColor("#7C3AED"))
@@ -67,6 +72,7 @@ class DrawContext:
     canvas: object  # reportlab.pdfgen.canvas.Canvas
     config: Config
     base_dir: str = "."
+    output_filename: str = "carousel.pdf"
 
     def with_overrides(self, overrides: dict[str, str]) -> "DrawContext":
         """Return a new DrawContext with per-slide color overrides applied."""
@@ -90,7 +96,8 @@ class DrawContext:
             brand_icon_path=self.config.brand_icon_path,
             show_footer=self.config.show_footer,
         )
-        return DrawContext(canvas=self.canvas, config=new_config, base_dir=self.base_dir)
+        return DrawContext(canvas=self.canvas, config=new_config, base_dir=self.base_dir,
+                          output_filename=self.output_filename)
 
 
 def resolve_colors(colors_cfg: ColorsConfig) -> ColorPalette:

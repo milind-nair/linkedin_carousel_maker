@@ -71,7 +71,8 @@ def render_carousel(payload_path: str, output_path: str | None = None,
     # Create canvas
     c = canvas.Canvas(output_path, pagesize=page_size)
 
-    ctx = DrawContext(canvas=c, config=cfg, base_dir=str(base_dir))
+    ctx = DrawContext(canvas=c, config=cfg, base_dir=str(base_dir),
+                      output_filename=payload.meta.output_filename)
 
     # Render slides
     slides = payload.slides

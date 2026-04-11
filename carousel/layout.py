@@ -32,12 +32,12 @@ def decorate_page(ctx: "DrawContext", dark: bool = False):
 
     c.saveState()
     if dark:
-        c.setFillColor(HexColor("#211D17"))
+        c.setFillColor(cfg.colors.band)
         c.rect(0, 0, W, VB, fill=1, stroke=0)
         c.setFillColor(cfg.colors.primary)
         c.setFillAlpha(0.05)
         c.rect(W * 0.58, 18, W * 0.48, 56, fill=1, stroke=0)
-        c.setStrokeColor(HexColor("#2B2721"))
+        c.setStrokeColor(cfg.colors.band_stroke)
     else:
         c.setFillColor(HexColor("#FBF7EC"))
         c.rect(0, 0, W, VB, fill=1, stroke=0)
@@ -60,7 +60,7 @@ def draw_footer(ctx: "DrawContext", dark: bool = False):
     y = 18
 
     # Separator line
-    sep_color = HexColor("#333330") if dark else cfg.colors.divider
+    sep_color = cfg.colors.separator_dark if dark else cfg.colors.divider
     c.setStrokeColor(sep_color)
     c.setLineWidth(0.5)
     c.line(M, y + 24, W - M, y + 24)
@@ -78,7 +78,7 @@ def draw_footer(ctx: "DrawContext", dark: bool = False):
         iy = y - 4
         # Circle background behind icon
         c.saveState()
-        circle_bg = HexColor("#2A2720") if dark else HexColor("#F5F0E6")
+        circle_bg = cfg.colors.icon_bg_dark if dark else HexColor("#F5F0E6")
         c.setFillColor(circle_bg)
         c.circle(ix + icon_size / 2, iy + icon_size / 2, icon_size / 2 + 2, fill=1, stroke=0)
         c.restoreState()

@@ -7,11 +7,14 @@ from reportlab.lib.colors import HexColor
 from carousel.registry import register
 from carousel.layout import decorate_page, draw_footer
 from carousel.images import draw_image
+from carousel.themes import resolve_dark_theme
 
 
 @register("closing_dark")
 def render_closing_dark(slide: dict, ctx):
     """Render a dark-background closing slide."""
+    theme = resolve_dark_theme(slide.get("theme"), ctx.output_filename)
+    ctx = ctx.with_overrides(theme.as_overrides())
     c = ctx.canvas
     cfg = ctx.config
     W, H = cfg.width, cfg.height
@@ -25,7 +28,7 @@ def render_closing_dark(slide: dict, ctx):
     # Geometric accent
     ga = slide.get("geometric_accent")
     if ga:
-        color = cfg.colors.resolve(ga.get("color", "#D97706")) if ga.get("color") else cfg.colors.primary
+        color = cfg.colors.resolve(ga.get("color")) if ga.get("color") else cfg.colors.primary
         c.saveState()
         c.setFillColor(color)
         c.setFillAlpha(ga.get("alpha", 0.06))
