@@ -1,0 +1,333 @@
+{
+  "meta": {
+    "title": "Kubernetes has a break-even point",
+    "author": "Milind Nair",
+    "output_filename": "kubernetes-break-even.pdf"
+  },
+  "global_styles": {
+    "dimensions": {
+      "width": 612,
+      "height": 765,
+      "margin": 48,
+      "viewport_band_height": 108
+    },
+    "colors": {
+      "bg": "#FFFDF5",
+      "bg_dark": "#1A1814",
+      "primary": "#D97706",
+      "primary_dark": "#92400E",
+      "primary_light": "#FEF3C7",
+      "accent": "#F59E0B",
+      "text": "#292524",
+      "text_light": "#F5F5F4",
+      "muted": "#A8A29E",
+      "stone": "#78716C",
+      "card_bg": "#FFFFFF",
+      "divider": "#E7E5E4",
+      "green": "#059669",
+      "green_bg": "#ECFDF5",
+      "purple": "#7C3AED",
+      "purple_bg": "#F5F3FF",
+      "blue": "#2563EB",
+      "red": "#DC2626",
+      "red_bg": "#FEF2F2"
+    },
+    "fonts": {
+      "display": {
+        "name": "Lora",
+        "candidates": [
+          "/usr/share/fonts/truetype/google-fonts/Lora-Variable.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+        ],
+        "fallback": "Helvetica-Bold"
+      },
+      "body": {
+        "name": "Poppins",
+        "candidates": [
+          "/usr/share/fonts/truetype/google-fonts/Poppins-Light.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+        ],
+        "fallback": "Helvetica"
+      },
+      "bold": {
+        "name": "PoppinsBold",
+        "candidates": [
+          "/usr/share/fonts/truetype/google-fonts/Poppins-Bold.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+        ],
+        "fallback": "Helvetica-Bold"
+      },
+      "mono": {
+        "name": "LiberationMono",
+        "candidates": [
+          "/usr/share/fonts/truetype/liberation/LiberationMono-Regular.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
+        ],
+        "fallback": "Courier"
+      }
+    },
+    "brand": {
+      "name": "MILIND NAIR",
+      "icon_path": "brandicon.png",
+      "show_footer": true
+    }
+  },
+  "slides": [
+    {
+      "type": "title_dark",
+      "kicker": "KUBERNETES",
+      "title_lines": ["Kubernetes", "has a", "break-even", "point."],
+      "subtitle_lines": ["Three conditions decide whether the complexity earns its keep."],
+      "cta_text": "Swipe to see the line \u2192",
+      "geometric_accent": {
+        "color": "#D97706",
+        "alpha": 0.07,
+        "x_pct": 0.56,
+        "y_pct": 0.72,
+        "w_pct": 0.58,
+        "h": 84
+      },
+      "image": {
+        "source": "../assets/kubernetes-break-even/hero.png",
+        "x": 120,
+        "y": 120,
+        "width": 336,
+        "height": 180,
+        "fit_mode": "contain",
+        "anchor": "bottom_left",
+        "opacity": 0.9
+      }
+    },
+    {
+      "type": "grid_cards",
+      "heading": "What Kubernetes actually does",
+      "columns": 2,
+      "items": [
+        {
+          "label": "Scheduling",
+          "description": "Places workloads across a fleet of nodes based on CPU, memory, and affinity rules.",
+          "color": "#D97706"
+        },
+        {
+          "label": "Self-healing",
+          "description": "Restarts failed containers, reschedules off dead nodes, gates traffic on health checks.",
+          "color": "#D97706"
+        },
+        {
+          "label": "Service networking",
+          "description": "Internal DNS, load balancing, and stable addressing for pods that come and go.",
+          "color": "#D97706"
+        },
+        {
+          "label": "Rollouts",
+          "description": "Declarative rolling updates with automatic rollback when health checks fail.",
+          "color": "#D97706"
+        }
+      ],
+      "illustration": { "glyph": "layers", "size": 54, "color": "#D97706" },
+      "image": {
+        "source": "../assets/kubernetes-break-even/slide2-scheduler.png",
+        "x": 131,
+        "y": 110,
+        "width": 350,
+        "height": 250,
+        "fit_mode": "contain",
+        "anchor": "bottom_left",
+        "opacity": 0.85
+      },
+      "bottom_takeaway": {
+        "label": "Primitives",
+        "body": "Four capabilities you would otherwise build and maintain yourself.",
+        "accent_color": "#D97706"
+      }
+    },
+    {
+      "type": "grid_cards",
+      "heading": "The complexity tax",
+      "columns": 2,
+      "items": [
+        {
+          "label": "Operational surface",
+          "description": "API server, etcd, scheduler, controller manager, kubelet, CNI, CSI, ingress. Each one fails in its own way.",
+          "color": "#DC2626"
+        },
+        {
+          "label": "Upgrade cadence",
+          "description": "Kubernetes ships three minor versions a year, each supported for 14 months. Falling behind drops you out of the security patch window.",
+          "color": "#DC2626"
+        },
+        {
+          "label": "Abstraction debt",
+          "description": "Every primitive has a dozen knobs you will eventually need to tune in production.",
+          "color": "#DC2626"
+        },
+        {
+          "label": "Observability cost",
+          "description": "Cluster metrics, pod metrics, and application metrics are three separate systems you now own.",
+          "color": "#DC2626"
+        }
+      ],
+      "illustration": { "glyph": "gear", "size": 54, "color": "#DC2626" },
+      "image": {
+        "source": "../assets/kubernetes-break-even/slide3-complexity.png",
+        "x": 131,
+        "y": 110,
+        "width": 350,
+        "height": 250,
+        "fit_mode": "contain",
+        "anchor": "bottom_left",
+        "opacity": 0.85
+      },
+      "bottom_takeaway": {
+        "label": "Cost",
+        "body": "The tax is paid in engineer-hours, not dollars.",
+        "accent_color": "#DC2626"
+      }
+    },
+    {
+      "type": "content_cards",
+      "pill": { "text": "PAYS OFF", "bg": "#ECFDF5", "fg": "#059669" },
+      "heading": "Three conditions make the cost worth paying",
+      "cards": [
+        {
+          "title": "Multi-service footprint",
+          "body": "You run 15 or more services that need to share infrastructure rather than each getting its own VM pool.",
+          "accent_color": "#059669"
+        },
+        {
+          "title": "Uneven traffic",
+          "body": "Load swings by 10x or more across the day, and paying for peak capacity around the clock is more expensive than autoscaling.",
+          "accent_color": "#059669"
+        },
+        {
+          "title": "High deployment velocity",
+          "body": "You ship to production several times a day across many services, and rolling updates with rollback are a first-class need.",
+          "accent_color": "#059669"
+        }
+      ],
+      "illustration": { "glyph": "scale", "size": 54, "color": "#059669" },
+      "bottom_takeaway": {
+        "label": "All three",
+        "body": "If all three hold, the control plane earns its keep.",
+        "accent_color": "#059669"
+      }
+    },
+    {
+      "type": "content_cards",
+      "pill": { "text": "SKIP IT", "bg": "#FEF2F2", "fg": "#DC2626" },
+      "heading": "Three conditions make the cost larger than the benefit",
+      "cards": [
+        {
+          "title": "Small service count",
+          "body": "You run under five services. The control plane will cost more to operate than the workloads it runs.",
+          "accent_color": "#DC2626"
+        },
+        {
+          "title": "Steady load",
+          "body": "Traffic is flat within a 2x range. Autoscaling is the main structural benefit of Kubernetes, and flat traffic leaves it on the table.",
+          "accent_color": "#DC2626"
+        },
+        {
+          "title": "No dedicated operator",
+          "body": "No single engineer is the unambiguous owner of the cluster. Shared ownership of distributed systems leaves outages that no one can debug.",
+          "accent_color": "#DC2626"
+        }
+      ],
+      "illustration": { "glyph": "lock", "size": 54, "color": "#DC2626" },
+      "bottom_takeaway": {
+        "label": "Any one",
+        "body": "Any one of these is enough to pick something simpler.",
+        "accent_color": "#DC2626"
+      }
+    },
+    {
+      "type": "comparison_table",
+      "heading": "Three alternatives to reach for first",
+      "columns": [
+        { "header": "Option", "width": 130 },
+        { "header": "Best for", "width": 193 },
+        { "header": "Tradeoff", "width": 193 }
+      ],
+      "rows": [
+        {
+          "label": "ECS + Fargate",
+          "color": "#D97706",
+          "cells": [
+            "AWS shops running under 20 services that want containers without managing nodes.",
+            "Locks you into AWS. Per-task pricing adds up at scale."
+          ]
+        },
+        {
+          "label": "PaaS (Fly.io, Render)",
+          "color": "#059669",
+          "cells": [
+            "Product teams that want Heroku ergonomics with container flexibility.",
+            "Opinionated platforms. Less control in exchange for faster shipping."
+          ]
+        },
+        {
+          "label": "Nomad",
+          "color": "#2563EB",
+          "cells": [
+            "Teams on the HashiCorp stack that want orchestration without the Kubernetes API surface.",
+            "Smaller ecosystem. Fewer third-party operators and integrations."
+          ]
+        }
+      ],
+      "illustration": { "glyph": "split_path", "size": 54, "color": "#D97706" },
+      "bottom_takeaway": {
+        "label": "Verdict",
+        "body": "Most teams land on one of these three and never need to look further.",
+        "accent_color": "#D97706"
+      }
+    },
+    {
+      "type": "decision_framework",
+      "heading": "Three questions before you adopt",
+      "subheading": "Answer honestly. The threshold is sharper than it looks.",
+      "decisions": [
+        {
+          "question": "Do you run 15 or more services in production?",
+          "answer": "If no, a managed container platform will serve you better at a fraction of the operational cost.",
+          "color": "#D97706"
+        },
+        {
+          "question": "Does one engineer unambiguously own the cluster?",
+          "answer": "If no, pick a platform that hides the cluster entirely. Shared ownership of Kubernetes ends in unowned incidents.",
+          "color": "#D97706"
+        },
+        {
+          "question": "Do you need features only Kubernetes offers, like custom operators or multi-tenant scheduling?",
+          "answer": "If no, the ecosystem is not a reason on its own. Reach for it only when the alternatives cannot model your problem.",
+          "color": "#DC2626"
+        }
+      ],
+      "illustration": { "glyph": "code_brackets", "size": 54, "color": "#D97706" },
+      "bottom_takeaway": {
+        "label": "Rule of thumb",
+        "body": "The threshold is roughly 15 services and one unambiguous cluster owner. Below either, the cost is larger than the benefit.",
+        "accent_color": "#DC2626",
+        "bg": "#FEF2F2"
+      }
+    },
+    {
+      "type": "closing_dark",
+      "quote_lines": ["The default", "answer is", "no."],
+      "summary_lines": [
+        "Kubernetes solves scheduling, self-healing, service networking, and rollouts.",
+        "The tax is a large operational surface that simpler platforms do not carry.",
+        "Adopt when you run 15 or more services and one engineer is the unambiguous owner of the cluster.",
+        "Below that threshold, a managed platform wins on cost and reliability."
+      ],
+      "geometric_accent": {
+        "color": "#D97706",
+        "alpha": 0.06,
+        "x_pct": 0.5,
+        "y_pct": 0.66,
+        "w_pct": 0.6,
+        "h": 64
+      }
+    }
+  ]
+}
