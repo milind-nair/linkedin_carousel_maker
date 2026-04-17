@@ -1,0 +1,285 @@
+{
+  "meta": {
+    "title": "I Asked 5 AIs to Wash a Car",
+    "author": "Milind Nair",
+    "output_filename": "car-wash-test.pdf"
+  },
+  "global_styles": {
+    "dimensions": {
+      "width": 612,
+      "height": 765,
+      "margin": 48,
+      "viewport_band_height": 108
+    },
+    "colors": {
+      "bg": "#FFFDF5",
+      "bg_dark": "#1A1814",
+      "primary": "#D97706",
+      "primary_dark": "#92400E",
+      "primary_light": "#FEF3C7",
+      "accent": "#F59E0B",
+      "text": "#292524",
+      "text_light": "#F5F5F4",
+      "muted": "#A8A29E",
+      "stone": "#78716C",
+      "card_bg": "#FFFFFF",
+      "divider": "#E7E5E4",
+      "green": "#059669",
+      "green_bg": "#ECFDF5",
+      "purple": "#7C3AED",
+      "purple_bg": "#F5F3FF",
+      "blue": "#2563EB",
+      "red": "#DC2626",
+      "red_bg": "#FEF2F2"
+    },
+    "fonts": {
+      "display": {
+        "name": "Lora",
+        "candidates": [
+          "/usr/share/fonts/truetype/google-fonts/Lora-Variable.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+        ],
+        "fallback": "Helvetica-Bold"
+      },
+      "body": {
+        "name": "Poppins",
+        "candidates": [
+          "/usr/share/fonts/truetype/google-fonts/Poppins-Light.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+        ],
+        "fallback": "Helvetica"
+      },
+      "bold": {
+        "name": "PoppinsBold",
+        "candidates": [
+          "/usr/share/fonts/truetype/google-fonts/Poppins-Bold.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+        ],
+        "fallback": "Helvetica-Bold"
+      },
+      "mono": {
+        "name": "LiberationMono",
+        "candidates": [
+          "/usr/share/fonts/truetype/liberation/LiberationMono-Regular.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
+        ],
+        "fallback": "Courier"
+      }
+    },
+    "brand": {
+      "name": "MILIND NAIR",
+      "icon_path": "brandicon.png",
+      "show_footer": true
+    }
+  },
+  "slides": [
+    {
+      "type": "title_dark",
+      "kicker": "LLM REASONING",
+      "title_lines": [
+        "I gave 5 AI tools",
+        "a simple question.",
+        "Only 1 got it right."
+      ],
+      "subtitle_lines": [
+        "The shortest answer was the only correct one."
+      ],
+      "cta_text": "Swipe to see each response \u2192",
+      "geometric_accent": {
+        "color": "#D97706",
+        "alpha": 0.07,
+        "x_pct": 0.56,
+        "y_pct": 0.72,
+        "w_pct": 0.58,
+        "h": 84
+      },
+      "image": {
+        "source": "../assets/car-wash/hero.png",
+        "x": 120,
+        "y": 120,
+        "width": 420,
+        "height": 225,
+        "fit_mode": "contain",
+        "anchor": "bottom_left",
+        "opacity": 0.95
+      }
+    },
+    {
+      "type": "content_cards",
+      "pill": { "text": "THE PROMPT", "bg": "#FEF3C7", "fg": "#92400E" },
+      "heading": "I gave each tool the same prompt.",
+      "cards": [
+        {
+          "title": "Prompt",
+          "body": "I want to wash my car. The car wash is 50 meters away. Should I walk or drive?",
+          "accent_color": "#D97706"
+        }
+      ],
+      "bottom_takeaway": {
+        "label": "Before you scroll",
+        "body": "Try answering this yourself.",
+        "accent_color": "#D97706"
+      }
+    },
+    {
+      "type": "content_cards",
+      "pill": { "text": "1 OF 5", "bg": "#FEF3C7", "fg": "#92400E" },
+      "heading": "ChatGPT wrote a cost model.",
+      "image": {
+        "source": "../assets/car-wash/cropped/chatgpt.png",
+        "x": 58,
+        "y": 120,
+        "width": 496,
+        "height": 336,
+        "fit_mode": "contain",
+        "anchor": "bottom_left",
+        "opacity": 1.0
+      },
+      "bottom_takeaway": {
+        "label": "Verdict",
+        "body": "Thoroughness did not make it correct.",
+        "accent_color": "#DC2626"
+      }
+    },
+    {
+      "type": "content_cards",
+      "pill": { "text": "2 OF 5", "bg": "#FEF3C7", "fg": "#92400E" },
+      "heading": "Claude Sonnet 4.6 was brief.",
+      "image": {
+        "source": "../assets/car-wash/cropped/claude-sonnet.png",
+        "x": 58,
+        "y": 300,
+        "width": 496,
+        "height": 121,
+        "fit_mode": "contain",
+        "anchor": "bottom_left",
+        "opacity": 1.0
+      },
+      "bottom_takeaway": {
+        "label": "Verdict",
+        "body": "Brevity did not make it correct.",
+        "accent_color": "#DC2626"
+      }
+    },
+    {
+      "type": "content_cards",
+      "pill": { "text": "3 OF 5", "bg": "#FEF3C7", "fg": "#92400E" },
+      "heading": "Claude Opus 4.7 wrote a paragraph.",
+      "image": {
+        "source": "../assets/car-wash/cropped/claude-opus.png",
+        "x": 58,
+        "y": 250,
+        "width": 496,
+        "height": 162,
+        "fit_mode": "contain",
+        "anchor": "bottom_left",
+        "opacity": 1.0
+      },
+      "bottom_takeaway": {
+        "label": "Verdict",
+        "body": "Eloquence did not make it correct.",
+        "accent_color": "#DC2626"
+      }
+    },
+    {
+      "type": "content_cards",
+      "pill": { "text": "4 OF 5", "bg": "#FEF3C7", "fg": "#92400E" },
+      "heading": "Grok leaned on personality.",
+      "image": {
+        "source": "../assets/car-wash/cropped/grok.png",
+        "x": 58,
+        "y": 120,
+        "width": 496,
+        "height": 326,
+        "fit_mode": "contain",
+        "anchor": "bottom_left",
+        "opacity": 1.0
+      },
+      "bottom_takeaway": {
+        "label": "Verdict",
+        "body": "Personality did not make it correct.",
+        "accent_color": "#DC2626"
+      }
+    },
+    {
+      "type": "content_cards",
+      "pill": { "text": "5 OF 5", "bg": "#ECFDF5", "fg": "#059669" },
+      "heading": "Gemini 2.5 Pro parsed the goal.",
+      "image": {
+        "source": "../assets/car-wash/cropped/gemini.png",
+        "x": 58,
+        "y": 240,
+        "width": 496,
+        "height": 175,
+        "fit_mode": "contain",
+        "anchor": "bottom_left",
+        "opacity": 1.0
+      },
+      "bottom_takeaway": {
+        "label": "Verdict",
+        "body": "The shortest answer happened to be correct.",
+        "accent_color": "#059669"
+      }
+    },
+    {
+      "type": "content_cards",
+      "pill": { "text": "THE CATCH", "bg": "#FEF3C7", "fg": "#92400E" },
+      "heading": "Walking 50 meters does not wash your car.",
+      "insight": {
+        "label": "WHY THIS IS A TRICK",
+        "body": "The goal in the prompt is to wash a vehicle. That vehicle is not at the car wash. If you walk, the car stays in the driveway.",
+        "accent_color": "#F59E0B"
+      },
+      "bottom_takeaway": {
+        "label": "The split",
+        "body": "Four tools answered the verbs. One reasoned about the noun.",
+        "accent_color": "#D97706"
+      }
+    },
+    {
+      "type": "content_cards",
+      "pill": { "text": "THE PATTERN", "bg": "#FEF3C7", "fg": "#92400E" },
+      "heading": "The prompt looks like a commute question.",
+      "cards": [
+        {
+          "title": "What the models saw",
+          "body": "The prompt contains two transport verbs, a short distance, and a preference to make. That is the shape of a commute question.",
+          "accent_color": "#DC2626"
+        },
+        {
+          "title": "What Gemini saw",
+          "body": "The goal was cleaning a car. The car had to be at the car wash. Walking there leaves it at home.",
+          "accent_color": "#059669"
+        }
+      ],
+      "bottom_takeaway": {
+        "label": "Broader failure",
+        "body": "Coding agents miss the same way when they misread a spec.",
+        "accent_color": "#D97706"
+      }
+    },
+    {
+      "type": "closing_dark",
+      "quote_lines": [
+        "Reasoning",
+        "beats",
+        "fluency."
+      ],
+      "summary_lines": [
+        "Four tools pattern-matched on walk versus drive. Only one parsed the goal.",
+        "The shortest answer was the only correct one.",
+        "LLMs default to surface patterns when reasoning would cost more tokens.",
+        "Coding agents fail this way when they misread specs."
+      ],
+      "geometric_accent": {
+        "color": "#D97706",
+        "alpha": 0.06,
+        "x_pct": 0.5,
+        "y_pct": 0.66,
+        "w_pct": 0.6,
+        "h": 64
+      }
+    }
+  ]
+}
