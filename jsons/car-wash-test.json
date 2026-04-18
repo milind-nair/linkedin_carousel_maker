@@ -116,6 +116,16 @@
           "accent_color": "#D97706"
         }
       ],
+      "image": {
+        "source": "../assets/car-wash/prompt-illustration.png",
+        "x": 76,
+        "y": 222,
+        "width": 460,
+        "height": 157,
+        "fit_mode": "contain",
+        "anchor": "bottom_left",
+        "opacity": 1.0
+      },
       "bottom_takeaway": {
         "label": "Before you scroll",
         "body": "Try answering this yourself.",
@@ -129,7 +139,7 @@
       "image": {
         "source": "../assets/car-wash/cropped/chatgpt.png",
         "x": 58,
-        "y": 120,
+        "y": 188,
         "width": 496,
         "height": 336,
         "fit_mode": "contain",
@@ -146,10 +156,18 @@
       "type": "content_cards",
       "pill": { "text": "2 OF 5", "bg": "#FEF3C7", "fg": "#92400E" },
       "heading": "Claude Sonnet 4.6 was brief.",
+      "cards": [
+        {
+          "title": "Fast. Smooth. Still wrong.",
+          "body": "Apparently 50 meters is basically your driveway. Small issue: the car also needs to come.",
+          "accent_color": "#DC2626",
+          "card_bg": "#FFF7ED"
+        }
+      ],
       "image": {
         "source": "../assets/car-wash/cropped/claude-sonnet.png",
         "x": 58,
-        "y": 300,
+        "y": 324,
         "width": 496,
         "height": 121,
         "fit_mode": "contain",
@@ -166,10 +184,18 @@
       "type": "content_cards",
       "pill": { "text": "3 OF 5", "bg": "#FEF3C7", "fg": "#92400E" },
       "heading": "Claude Opus 4.7 wrote a paragraph.",
+      "cards": [
+        {
+          "title": "A luxury miss.",
+          "body": "Very polished. Very thoughtful. Still solving a commute problem nobody actually asked.",
+          "accent_color": "#DC2626",
+          "card_bg": "#FFF7ED"
+        }
+      ],
       "image": {
         "source": "../assets/car-wash/cropped/claude-opus.png",
         "x": 58,
-        "y": 250,
+        "y": 292,
         "width": 496,
         "height": 162,
         "fit_mode": "contain",
@@ -189,7 +215,7 @@
       "image": {
         "source": "../assets/car-wash/cropped/grok.png",
         "x": 58,
-        "y": 120,
+        "y": 188,
         "width": 496,
         "height": 326,
         "fit_mode": "contain",
@@ -205,11 +231,19 @@
     {
       "type": "content_cards",
       "pill": { "text": "5 OF 5", "bg": "#ECFDF5", "fg": "#059669" },
-      "heading": "Gemini 2.5 Pro parsed the goal.",
+      "heading": "Gemini 3 Pro parsed the goal.",
+      "cards": [
+        {
+          "title": "The bar was on the floor.",
+          "body": "Gemini cleared it by noticing the car has to be at the car wash. Somehow that won.",
+          "accent_color": "#059669",
+          "card_bg": "#ECFDF5"
+        }
+      ],
       "image": {
         "source": "../assets/car-wash/cropped/gemini.png",
         "x": 58,
-        "y": 240,
+        "y": 284,
         "width": 496,
         "height": 175,
         "fit_mode": "contain",
@@ -220,43 +254,6 @@
         "label": "Verdict",
         "body": "The shortest answer happened to be correct.",
         "accent_color": "#059669"
-      }
-    },
-    {
-      "type": "content_cards",
-      "pill": { "text": "THE CATCH", "bg": "#FEF3C7", "fg": "#92400E" },
-      "heading": "Walking 50 meters does not wash your car.",
-      "insight": {
-        "label": "WHY THIS IS A TRICK",
-        "body": "The goal in the prompt is to wash a vehicle. That vehicle is not at the car wash. If you walk, the car stays in the driveway.",
-        "accent_color": "#F59E0B"
-      },
-      "bottom_takeaway": {
-        "label": "The split",
-        "body": "Four tools answered the verbs. One reasoned about the noun.",
-        "accent_color": "#D97706"
-      }
-    },
-    {
-      "type": "content_cards",
-      "pill": { "text": "THE PATTERN", "bg": "#FEF3C7", "fg": "#92400E" },
-      "heading": "The prompt looks like a commute question.",
-      "cards": [
-        {
-          "title": "What the models saw",
-          "body": "The prompt contains two transport verbs, a short distance, and a preference to make. That is the shape of a commute question.",
-          "accent_color": "#DC2626"
-        },
-        {
-          "title": "What Gemini saw",
-          "body": "The goal was cleaning a car. The car had to be at the car wash. Walking there leaves it at home.",
-          "accent_color": "#059669"
-        }
-      ],
-      "bottom_takeaway": {
-        "label": "Broader failure",
-        "body": "Coding agents miss the same way when they misread a spec.",
-        "accent_color": "#D97706"
       }
     },
     {

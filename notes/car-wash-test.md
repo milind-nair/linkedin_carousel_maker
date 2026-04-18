@@ -26,7 +26,7 @@ This is a lateral-thinking puzzle, not a test of arithmetic or general knowledge
 
 The pattern across the four: the model recognized a template, generated a confident answer in that template, and never stopped to check whether the template matched the user's actual goal.
 
-## Why Gemini 2.5 Pro got it right
+## Why Gemini 3 Pro got it right
 
 Gemini returned two sentences. "You must drive. The vehicle requires physical presence at the facility for cleaning. Walking the 50 meters leaves the car at its current location."
 
