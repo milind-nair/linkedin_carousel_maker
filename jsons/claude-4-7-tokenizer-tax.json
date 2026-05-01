@@ -1,0 +1,233 @@
+{
+  "meta": {
+    "title": "The Claude Opus 4.7 Tokenizer Tax",
+    "author": "Milind Nair",
+    "output_filename": "claude-4-7-tokenizer-tax.pdf"
+  },
+  "global_styles": {
+    "dimensions": {
+      "width": 612,
+      "height": 765,
+      "margin": 48,
+      "viewport_band_height": 108
+    },
+    "colors": {
+      "bg": "#FFFDF5",
+      "bg_dark": "#1A1814",
+      "primary": "#D97706",
+      "primary_dark": "#92400E",
+      "primary_light": "#FEF3C7",
+      "accent": "#F59E0B",
+      "text": "#292524",
+      "text_light": "#F5F5F4",
+      "muted": "#A8A29E",
+      "stone": "#78716C",
+      "card_bg": "#FFFFFF",
+      "divider": "#E7E5E4",
+      "green": "#059669",
+      "green_bg": "#ECFDF5",
+      "purple": "#7C3AED",
+      "purple_bg": "#F5F3FF",
+      "blue": "#2563EB",
+      "red": "#DC2626",
+      "red_bg": "#FEF2F2"
+    },
+    "fonts": {
+      "display": {
+        "name": "Lora",
+        "candidates": [
+          "/usr/share/fonts/truetype/google-fonts/Lora-Variable.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+        ],
+        "fallback": "Helvetica-Bold"
+      },
+      "body": {
+        "name": "Poppins",
+        "candidates": [
+          "/usr/share/fonts/truetype/google-fonts/Poppins-Light.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+        ],
+        "fallback": "Helvetica"
+      },
+      "bold": {
+        "name": "PoppinsBold",
+        "candidates": [
+          "/usr/share/fonts/truetype/google-fonts/Poppins-Bold.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+        ],
+        "fallback": "Helvetica-Bold"
+      },
+      "mono": {
+        "name": "LiberationMono",
+        "candidates": [
+          "/usr/share/fonts/truetype/liberation/LiberationMono-Regular.ttf",
+          "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
+        ],
+        "fallback": "Courier"
+      }
+    },
+    "brand": {
+      "name": "MILIND NAIR",
+      "icon_path": "brandicon.png",
+      "show_footer": true
+    }
+  },
+  "slides": [
+    {
+      "type": "title_dark",
+      "kicker": "CLAUDE OPUS 4.7",
+      "title_lines": [
+        "Same sticker,",
+        "Bigger bill."
+      ],
+      "subtitle_lines": [
+        "Claude Opus 4.7 raised per-session cost roughly 20 to 30% on measured workloads.",
+        "The per-token price did not change."
+      ],
+      "cta_text": "Swipe to see the measurement \u2192",
+      "geometric_accent": {
+        "color": "#D97706",
+        "alpha": 0.07,
+        "x_pct": 0.56,
+        "y_pct": 0.72,
+        "w_pct": 0.58,
+        "h": 84
+      },
+      "image": {
+        "source": "../assets/tokenizer-tax/hero.png",
+        "x": 30,
+        "y": 120,
+        "width": 546,
+        "height": 292.5,
+        "fit_mode": "contain",
+        "anchor": "bottom_left",
+        "opacity": 0.95
+      }
+    },
+    {
+      "type": "content_cards",
+      "pill": { "text": "WHAT CHANGED", "bg": "#FEF3C7", "fg": "#92400E" },
+      "heading": "Same words. More tokens.",
+      "image": {
+        "source": "../assets/tokenizer-tax/measurement-viz.png",
+        "x": 48,
+        "y": 220,
+        "width": 516,
+        "height": 340,
+        "fit_mode": "contain",
+        "anchor": "bottom_left",
+        "opacity": 1.0
+      },
+      "bottom_takeaway": {
+        "label": "Measured average",
+        "body": "1.325x more tokens on authentic Claude Code workloads. CLAUDE.md files hit 1.45x.",
+        "accent_color": "#D97706"
+      }
+    },
+    {
+      "type": "content_cards",
+      "pill": { "text": "THE BILL", "bg": "#FEF2F2", "fg": "#DC2626" },
+      "heading": "Per-session cost rose roughly 20 to 30%.",
+      "image": {
+        "source": "../assets/tokenizer-tax/cost-bars.png",
+        "x": 48,
+        "y": 200,
+        "width": 516,
+        "height": 355,
+        "fit_mode": "contain",
+        "anchor": "bottom_left",
+        "opacity": 1.0
+      },
+      "bottom_takeaway": {
+        "label": "Same work, bigger bill",
+        "body": "Per-token price held flat. Effective session cost climbed because the new tokenizer emitted more tokens per turn.",
+        "accent_color": "#DC2626"
+      }
+    },
+    {
+      "type": "content_cards",
+      "pill": { "text": "THE OTHER HALF", "bg": "#ECFDF5", "fg": "#059669" },
+      "heading": "On IFEval, the gain was narrow.",
+      "cards": [
+        {
+          "title": "IFEval, strict evaluation",
+          "body": "Instruction-following improved 5 points, 17/20 to 18/20. N=20, so a one-prompt swing — directionally right, imprecise.",
+          "accent_color": "#059669"
+        },
+        {
+          "title": "IFEval, loose evaluation",
+          "body": "No change. Both Opus 4.6 and Opus 4.7 scored 18/20.",
+          "accent_color": "#78716C"
+        }
+      ],
+      "illustration": { "glyph": "gear", "size": 54, "color": "#059669" },
+      "bottom_takeaway": {
+        "label": "Scope note",
+        "body": "Opus 4.7's bigger wins sit on SWE-bench Pro (+10.9pp), MCP-Atlas (+14.6pp), and CursorBench (58 to 70), outside the tokenizer study's scope.",
+        "accent_color": "#059669"
+      }
+    },
+    {
+      "type": "decision_framework",
+      "heading": "When the upgrade earns its keep.",
+      "decisions": [
+        {
+          "question": "When is Opus 4.7 worth the cost uplift?",
+          "answer": "When strict instruction-following matters, and the 5-point gain moves your pass rate across a threshold you care about.",
+          "color": "#059669"
+        },
+        {
+          "question": "Where does the cost uplift hit hardest?",
+          "answer": "On real-world samples: CLAUDE.md files expanded 1.45x, user prompts 1.37x, stack traces 1.25x. Prose-heavy context feels the pricing change most.",
+          "color": "#D97706"
+        },
+        {
+          "question": "What should you actually measure?",
+          "answer": "Dollars per completed task. Per-token price is the sticker; session cost is the bill.",
+          "color": "#2563EB"
+        }
+      ],
+      "illustration": { "glyph": "split_path", "size": 54, "color": "#D97706" },
+      "bottom_takeaway": {
+        "label": "Rule of thumb",
+        "body": "Tokens are the sticker. Tasks are the bill.",
+        "accent_color": "#D97706",
+        "bg": "#FEF3C7"
+      }
+    },
+    {
+      "type": "closing_dark",
+      "quote_lines": [
+        "Tokens are",
+        "the sticker.",
+        "Tasks are",
+        "the bill."
+      ],
+      "_summary_lines": [
+        "Claude Opus 4.7's tokenizer expanded real workloads 1.325x on average.",
+        "Per-session cost rose roughly 20 to 30%. Per-token price did not change.",
+        "Capability gain was 5 points on IFEval strict, none on loose, N=20.",
+        "Dollars per completed task is the number that answers the upgrade question."
+      ],
+      "geometric_accent": {
+        "color": "#D97706",
+        "alpha": 0.06,
+        "x_pct": 0.5,
+        "y_pct": 0.66,
+        "w_pct": 0.6,
+        "h": 64
+      },
+      "image": {
+        "source": "../assets/tokenizer-tax/closing.png",
+        "x": 106,
+        "y": 100,
+        "width": 400,
+        "height": 300,
+        "fit_mode": "contain",
+        "anchor": "bottom_left",
+        "opacity": 0.3
+      }
+    }
+  ]
+}
