@@ -27,6 +27,8 @@ SWEEP_CURVATURE_RATIO = 0.18    # offset = length * ratio
 SWEEP_MAX_BOW_PT = 28           # offset is capped at this value
 PEN_DOUBLE_OFFSET = (0.4, -0.3) # second-pass offset for pen-passed-twice feel
 PEN_DOUBLE_WIDTH_RATIO = 0.7    # second pass at this fraction of line width
+UNDERLINE_WIDTH_MULTIPLIER = 1.3   # underlines render heavier than default sketch lines
+CIRCLE_HORIZONTAL_STRETCH = 1.05   # ellipsoidal stretch for hand-drawn circles
 
 
 def make_seed(text: str, slide_index: int) -> int:
@@ -198,7 +200,7 @@ def draw_circle_around(
     rng = random.Random(seed ^ 0xC1C1E)
     canvas.saveState()
     canvas.setStrokeColor(color)
-    radius_x = radius * 1.05
+    radius_x = radius * CIRCLE_HORIZONTAL_STRETCH
     pts: list[Point] = []
     # Random starting angle so circles don't all begin at 3 o'clock
     start_angle = rng.uniform(0, 2 * math.pi)
@@ -223,7 +225,7 @@ def draw_underline(
     color=RED_PEN,
     samples: int = 24,
     jitter: float = 0.9,
-    line_width: float = DEFAULT_LINE_WIDTH * 1.3,
+    line_width: float = DEFAULT_LINE_WIDTH * UNDERLINE_WIDTH_MULTIPLIER,
 ):
     """Wavy hand-drawn underline."""
     canvas.saveState()
