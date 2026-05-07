@@ -64,6 +64,10 @@ class Config:
     margin: float = 48
     viewport_band_height: float = 108
     content_width: float = 516  # width - 2 * margin
+    # Lab notebook layout
+    body_column_width: float = 432
+    left_gutter: float = 60
+    right_gutter: float = 120
     colors: ColorPalette = field(default_factory=ColorPalette)
     fonts: FontSet = field(default_factory=FontSet)
     brand_name: str = "MILIND NAIR"
@@ -95,6 +99,9 @@ class DrawContext:
             margin=self.config.margin,
             viewport_band_height=self.config.viewport_band_height,
             content_width=self.config.content_width,
+            body_column_width=self.config.body_column_width,
+            left_gutter=self.config.left_gutter,
+            right_gutter=self.config.right_gutter,
             colors=new_palette,
             fonts=self.config.fonts,
             brand_name=self.config.brand_name,
@@ -124,6 +131,9 @@ def resolve_config(styles: GlobalStyles, brand_icon_resolved: str | None = None)
         margin=dims.margin,
         viewport_band_height=dims.viewport_band_height,
         content_width=dims.width - 2 * dims.margin,
+        body_column_width=dims.body_column_width,
+        left_gutter=dims.left_gutter,
+        right_gutter=dims.right_gutter,
         colors=resolve_colors(styles.colors),
         fonts=FontSet(),  # populated later by fonts.register_fonts()
         brand_name=styles.brand.name,

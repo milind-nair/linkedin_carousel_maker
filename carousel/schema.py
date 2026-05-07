@@ -223,6 +223,10 @@ class DimensionsConfig(BaseModel):
     height: float = 765
     margin: float = 48
     viewport_band_height: float = 108
+    # Lab notebook layout
+    body_column_width: float = 432
+    left_gutter: float = 60
+    right_gutter: float = 120
 
 
 class FontEntry(BaseModel):
