@@ -44,4 +44,19 @@ def register_fonts(fonts_cfg: FontsConfig) -> FontSet:
             fonts_cfg.mono.candidates,
             fonts_cfg.mono.fallback,
         ),
+        headline_serif=register_font_with_fallback(
+            fonts_cfg.headline_serif.name,
+            fonts_cfg.headline_serif.candidates,
+            fonts_cfg.headline_serif.fallback,
+        ),
+        body_serif=register_font_with_fallback(
+            fonts_cfg.body_serif.name,
+            fonts_cfg.body_serif.candidates,
+            fonts_cfg.body_serif.fallback,
+        ),
+        handwriting=register_font_with_fallback(
+            fonts_cfg.handwriting.name,
+            fonts_cfg.handwriting.candidates,
+            fonts_cfg.handwriting.fallback,
+        ),
     )

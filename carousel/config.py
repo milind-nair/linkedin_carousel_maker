@@ -54,6 +54,10 @@ class FontSet:
     body: str = "Helvetica"
     bold: str = "Helvetica-Bold"
     mono: str = "Courier"
+    # Lab notebook roles
+    headline_serif: str = "Times-Bold"
+    body_serif: str = "Times-Roman"
+    handwriting: str = "Helvetica-Oblique"
 
 
 @dataclass

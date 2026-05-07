@@ -262,12 +262,37 @@ class FontsConfig(BaseModel):
         fallback="Helvetica-Bold",
     )
     mono: FontEntry = FontEntry(
-        name="LiberationMono",
+        name="IBMPlexMono",
         candidates=[
+            "assets/fonts/IBMPlexMono-Regular.ttf",
             "/usr/share/fonts/truetype/liberation/LiberationMono-Regular.ttf",
             "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
         ],
         fallback="Courier",
+    )
+    headline_serif: FontEntry = FontEntry(
+        name="IBMPlexSerifBold",
+        candidates=[
+            "assets/fonts/IBMPlexSerif-Bold.ttf",
+            "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf",
+        ],
+        fallback="Times-Bold",
+    )
+    body_serif: FontEntry = FontEntry(
+        name="SourceSerif",
+        candidates=[
+            "assets/fonts/SourceSerif4-Regular.ttf",
+            "assets/fonts/IBMPlexSerif-Regular.ttf",
+            "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
+        ],
+        fallback="Times-Roman",
+    )
+    handwriting: FontEntry = FontEntry(
+        name="Caveat",
+        candidates=[
+            "assets/fonts/Caveat-Regular.ttf",
+        ],
+        fallback="Helvetica-Oblique",
     )
 
 
