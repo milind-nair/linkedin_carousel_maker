@@ -177,3 +177,62 @@ def draw_arrow(
         _draw_arrowhead(canvas, pts[-1], (x2 - x1, y2 - y1), seed, color)
 
     canvas.restoreState()
+
+
+def draw_circle_around(
+    canvas,
+    cx: float,
+    cy: float,
+    radius: float,
+    seed: int,
+    color=RED_PEN,
+    samples: int = 40,
+    jitter: float = 1.2,
+    line_width: float = DEFAULT_LINE_WIDTH,
+):
+    """Hand-drawn ellipse-ish circle (closed wobbled path).
+
+    Slight horizontal stretch (1.05x) so it reads as a quick pen-circle
+    rather than a perfect compass curve.
+    """
+    rng = random.Random(seed ^ 0xC1C1E)
+    canvas.saveState()
+    canvas.setStrokeColor(color)
+    radius_x = radius * 1.05
+    pts: list[Point] = []
+    # Random starting angle so circles don't all begin at 3 o'clock
+    start_angle = rng.uniform(0, 2 * math.pi)
+    for i in range(samples + 1):
+        t = i / samples
+        angle = start_angle + t * 2 * math.pi
+        # Radius wobble grows slightly — pen drift on a closed loop
+        r_jitter = rng.gauss(0, jitter * 0.6)
+        x = cx + (radius_x + r_jitter) * math.cos(angle)
+        y = cy + (radius + r_jitter) * math.sin(angle)
+        pts.append((x, y))
+    _draw_polyline(canvas, pts, line_width)
+    canvas.restoreState()
+
+
+def draw_underline(
+    canvas,
+    x: float,
+    y: float,
+    width: float,
+    seed: int,
+    color=RED_PEN,
+    samples: int = 24,
+    jitter: float = 0.9,
+    line_width: float = DEFAULT_LINE_WIDTH * 1.3,
+):
+    """Wavy hand-drawn underline."""
+    canvas.saveState()
+    canvas.setStrokeColor(color)
+    pts = _wobbled_polyline(
+        [(x, y), (x + width, y)],
+        seed=seed,
+        samples=samples,
+        jitter=jitter,
+    )
+    _draw_polyline(canvas, pts, line_width)
+    canvas.restoreState()

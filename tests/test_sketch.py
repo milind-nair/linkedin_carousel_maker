@@ -49,24 +49,24 @@ def test_arrow_sweep_draws_on_canvas():
     assert c.line.called or c.bezier.called or c.drawPath.called or c.beginPath.called
 
 
+def _normalize_calls(canvas):
+    """Replace MagicMock args with a sentinel so two canvases with
+    different fresh path-mock identities compare equal."""
+    out = []
+    for name, args, kwargs in canvas.method_calls:
+        norm_args = tuple(
+            "<mock>" if isinstance(a, MagicMock) else a for a in args
+        )
+        norm_kwargs = tuple(sorted(kwargs.items()))
+        out.append((name, norm_args, norm_kwargs))
+    return out
+
+
 def test_arrow_is_deterministic():
     c1, c2 = _record_canvas(), _record_canvas()
     draw_arrow(c1, (50, 100), (200, 100), seed=1, style="sweep")
     draw_arrow(c2, (50, 100), (200, 100), seed=1, style="sweep")
-
-    def _normalize(canvas):
-        # Replace MagicMock args with a sentinel so two canvases with
-        # different fresh path-mock identities compare equal.
-        out = []
-        for name, args, kwargs in canvas.method_calls:
-            norm_args = tuple(
-                "<mock>" if isinstance(a, MagicMock) else a for a in args
-            )
-            norm_kwargs = tuple(sorted(kwargs.items()))
-            out.append((name, norm_args, norm_kwargs))
-        return out
-
-    assert _normalize(c1) == _normalize(c2)
+    assert _normalize_calls(c1) == _normalize_calls(c2)
 
 
 def test_arrow_pointer_is_straighter_than_sweep():
@@ -86,3 +86,27 @@ def test_arrow_branch_changes_direction():
     branch = _arrow_anchor_points((0, 0), (50, -80), style="branch")
     # Branch first travels horizontally before turning down
     assert any(abs(y) < 1 and x > 5 for x, y in branch)
+
+
+from carousel.sketch import draw_circle_around, draw_underline
+
+
+def test_circle_around_is_deterministic():
+    c1, c2 = _record_canvas(), _record_canvas()
+    draw_circle_around(c1, 100, 100, radius=20, seed=7)
+    draw_circle_around(c2, 100, 100, radius=20, seed=7)
+    assert _normalize_calls(c1) == _normalize_calls(c2)
+
+
+def test_underline_is_deterministic():
+    c1, c2 = _record_canvas(), _record_canvas()
+    draw_underline(c1, 50, 80, width=120, seed=11)
+    draw_underline(c2, 50, 80, width=120, seed=11)
+    assert _normalize_calls(c1) == _normalize_calls(c2)
+
+
+def test_circle_around_calls_path_methods():
+    c = _record_canvas()
+    draw_circle_around(c, 100, 100, radius=20, seed=7)
+    assert c.beginPath.called
+    assert c.drawPath.called
