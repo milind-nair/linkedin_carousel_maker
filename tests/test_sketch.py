@@ -53,13 +53,20 @@ def test_arrow_is_deterministic():
     c1, c2 = _record_canvas(), _record_canvas()
     draw_arrow(c1, (50, 100), (200, 100), seed=1, style="sweep")
     draw_arrow(c2, (50, 100), (200, 100), seed=1, style="sweep")
-    # Same sequence of canvas operations either way (compare method names
-    # only — full method_calls equality breaks on MagicMock path-object
-    # identity, since p = canvas.beginPath() returns a fresh mock per call).
-    names1 = [name for name, _, _ in c1.method_calls]
-    names2 = [name for name, _, _ in c2.method_calls]
-    assert names1 == names2
-    assert len(c1.method_calls) == len(c2.method_calls)
+
+    def _normalize(canvas):
+        # Replace MagicMock args with a sentinel so two canvases with
+        # different fresh path-mock identities compare equal.
+        out = []
+        for name, args, kwargs in canvas.method_calls:
+            norm_args = tuple(
+                "<mock>" if isinstance(a, MagicMock) else a for a in args
+            )
+            norm_kwargs = tuple(sorted(kwargs.items()))
+            out.append((name, norm_args, norm_kwargs))
+        return out
+
+    assert _normalize(c1) == _normalize(c2)
 
 
 def test_arrow_pointer_is_straighter_than_sweep():

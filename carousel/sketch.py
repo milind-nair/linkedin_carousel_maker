@@ -20,6 +20,14 @@ DEFAULT_JITTER = 1.5      # std-dev of point perturbation, in points
 DEFAULT_SAMPLES = 32      # points sampled along a curve
 DEFAULT_LINE_WIDTH = 1.2  # stroke weight for hand-drawn lines
 
+# Tuning knobs — adjusted in the visual gate (Task 15 of the foundation plan).
+ARROWHEAD_LENGTH = 7.0
+ARROWHEAD_HALF_WIDTH = 3.5
+SWEEP_CURVATURE_RATIO = 0.18    # offset = length * ratio
+SWEEP_MAX_BOW_PT = 28           # offset is capped at this value
+PEN_DOUBLE_OFFSET = (0.4, -0.3) # second-pass offset for pen-passed-twice feel
+PEN_DOUBLE_WIDTH_RATIO = 0.7    # second pass at this fraction of line width
+
 
 def make_seed(text: str, slide_index: int) -> int:
     """Deterministic 32-bit seed from slide identity. Same identity = same wobble."""
@@ -90,7 +98,7 @@ def _arrow_anchor_points(start: Point, end: Point, style: str) -> list[Point]:
         # Perpendicular unit vector
         px, py = -dy / length, dx / length
         # Offset magnitude: a quarter of the run, capped
-        offset = min(length * 0.18, 28)
+        offset = min(length * SWEEP_CURVATURE_RATIO, SWEEP_MAX_BOW_PT)
         ctrl = (mx + px * offset, my + py * offset)
         return [start, ctrl, end]
     if style == "pointer":
@@ -119,8 +127,6 @@ def _draw_arrowhead(canvas, tip: Point, direction: Point, seed: int, color):
     ux, uy = dx / length, dy / length
     # Perpendicular
     px, py = -uy, ux
-    head_len = 7.0
-    head_wide = 3.5
     # ±5° rotation jitter
     angle_jitter = math.radians(rng.uniform(-5, 5))
     cos_a, sin_a = math.cos(angle_jitter), math.sin(angle_jitter)
@@ -128,9 +134,9 @@ def _draw_arrowhead(canvas, tip: Point, direction: Point, seed: int, color):
     ruy = ux * sin_a + uy * cos_a
     rpx = -ruy
     rpy = rux
-    base = (tip[0] - rux * head_len, tip[1] - ruy * head_len)
-    left = (base[0] + rpx * head_wide, base[1] + rpy * head_wide)
-    right = (base[0] - rpx * head_wide, base[1] - rpy * head_wide)
+    base = (tip[0] - rux * ARROWHEAD_LENGTH, tip[1] - ruy * ARROWHEAD_LENGTH)
+    left = (base[0] + rpx * ARROWHEAD_HALF_WIDTH, base[1] + rpy * ARROWHEAD_HALF_WIDTH)
+    right = (base[0] - rpx * ARROWHEAD_HALF_WIDTH, base[1] - rpy * ARROWHEAD_HALF_WIDTH)
     p = canvas.beginPath()
     p.moveTo(*tip)
     p.lineTo(*left)
@@ -161,8 +167,8 @@ def draw_arrow(
 
     # Draw twice with tiny offset for pen-passed-twice feel
     _draw_polyline(canvas, pts, line_width)
-    pts2 = [(x + 0.4, y - 0.3) for x, y in pts]
-    _draw_polyline(canvas, pts2, line_width * 0.7)
+    pts2 = [(x + PEN_DOUBLE_OFFSET[0], y + PEN_DOUBLE_OFFSET[1]) for x, y in pts]
+    _draw_polyline(canvas, pts2, line_width * PEN_DOUBLE_WIDTH_RATIO)
 
     # Arrowhead direction: from second-to-last to last point
     if len(pts) >= 2:
