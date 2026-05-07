@@ -293,6 +293,11 @@ class ColorsConfig(BaseModel):
     blue: str = "#2563EB"
     red: str = "#DC2626"
     red_bg: str = "#FEF2F2"
+    # Lab notebook palette
+    paper: str = "#FAF7F0"
+    ink: str = "#2A2A2A"
+    red_pen: str = "#B22222"
+    diagram_blue: str = "#3E5C76"
 
 
 class BrandConfig(BaseModel):

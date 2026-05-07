@@ -34,6 +34,11 @@ class ColorPalette:
     blue: Color = field(default_factory=lambda: HexColor("#2563EB"))
     red: Color = field(default_factory=lambda: HexColor("#DC2626"))
     red_bg: Color = field(default_factory=lambda: HexColor("#FEF2F2"))
+    # Lab notebook palette
+    paper: Color = field(default_factory=lambda: HexColor("#FAF7F0"))
+    ink: Color = field(default_factory=lambda: HexColor("#2A2A2A"))
+    red_pen: Color = field(default_factory=lambda: HexColor("#B22222"))
+    diagram_blue: Color = field(default_factory=lambda: HexColor("#3E5C76"))
 
     def resolve(self, name_or_hex: str) -> Color:
         """Look up by palette name or parse as hex. Returns HexColor."""
