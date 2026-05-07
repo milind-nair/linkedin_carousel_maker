@@ -1,3 +1,4 @@
+from unittest.mock import MagicMock
 from carousel.sketch import make_seed, _wobbled_polyline
 
 
@@ -29,3 +30,47 @@ def test_wobbled_polyline_stays_within_jitter_envelope():
     # Interior points stay roughly within ±5pt (jitter=1.5 should give ~3σ envelope ≈ 4.5pt)
     for x, y in pts[1:-1]:
         assert abs(y) < 6
+
+
+from carousel.sketch import draw_arrow
+
+
+def _record_canvas() -> MagicMock:
+    """A fake canvas that records all method calls."""
+    return MagicMock(name="canvas")
+
+
+def test_arrow_sweep_draws_on_canvas():
+    c = _record_canvas()
+    draw_arrow(c, (50, 100), (200, 100), seed=1, style="sweep")
+    # Stroke color was set to red_pen
+    assert c.setStrokeColorRGB.called or c.setStrokeColor.called
+    # A path was drawn
+    assert c.line.called or c.bezier.called or c.drawPath.called or c.beginPath.called
+
+
+def test_arrow_is_deterministic():
+    c1, c2 = _record_canvas(), _record_canvas()
+    draw_arrow(c1, (50, 100), (200, 100), seed=1, style="sweep")
+    draw_arrow(c2, (50, 100), (200, 100), seed=1, style="sweep")
+    # Same number of canvas operations either way
+    assert c1.method_calls == c2.method_calls
+
+
+def test_arrow_pointer_is_straighter_than_sweep():
+    """Pointer style should produce shorter total path length than sweep
+    for the same endpoints — sweep curves, pointer doesn't."""
+    from carousel.sketch import _arrow_anchor_points
+    sweep = _arrow_anchor_points((0, 0), (100, 0), style="sweep")
+    pointer = _arrow_anchor_points((0, 0), (100, 0), style="pointer")
+    # Sweep has at least one off-axis control point; pointer does not
+    sweep_off = max(abs(y) for x, y in sweep)
+    pointer_off = max(abs(y) for x, y in pointer)
+    assert sweep_off > pointer_off
+
+
+def test_arrow_branch_changes_direction():
+    from carousel.sketch import _arrow_anchor_points
+    branch = _arrow_anchor_points((0, 0), (50, -80), style="branch")
+    # Branch first travels horizontally before turning down
+    assert any(abs(y) < 1 and x > 5 for x, y in branch)
