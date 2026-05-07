@@ -103,11 +103,12 @@ def _arrow_anchor_points(start: Point, end: Point, style: str) -> list[Point]:
 
 
 def _draw_polyline(canvas, points: list[Point], line_width: float):
+    p = canvas.beginPath()
+    p.moveTo(*points[0])
+    for x, y in points[1:]:
+        p.lineTo(x, y)
     canvas.setLineWidth(line_width)
-    for i in range(len(points) - 1):
-        x1, y1 = points[i]
-        x2, y2 = points[i + 1]
-        canvas.line(x1, y1, x2, y2)
+    canvas.drawPath(p, stroke=1, fill=0)
 
 
 def _draw_arrowhead(canvas, tip: Point, direction: Point, seed: int, color):
@@ -130,11 +131,13 @@ def _draw_arrowhead(canvas, tip: Point, direction: Point, seed: int, color):
     base = (tip[0] - rux * head_len, tip[1] - ruy * head_len)
     left = (base[0] + rpx * head_wide, base[1] + rpy * head_wide)
     right = (base[0] - rpx * head_wide, base[1] - rpy * head_wide)
+    p = canvas.beginPath()
+    p.moveTo(*tip)
+    p.lineTo(*left)
+    p.lineTo(*right)
+    p.close()
     canvas.setFillColor(color)
-    # Draw arrowhead triangle using lines
-    canvas.line(tip[0], tip[1], left[0], left[1])
-    canvas.line(left[0], left[1], right[0], right[1])
-    canvas.line(right[0], right[1], tip[0], tip[1])
+    canvas.drawPath(p, stroke=1, fill=1)
 
 
 def draw_arrow(
